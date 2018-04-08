@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Golf GPS</string>
+    <string-array name="golf_clubs">
+        <item>North West Golf Club</item>
+        <item>Buncrana Golf Club</item>
+    </string-array>
 </resources>
