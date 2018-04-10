@@ -9,6 +9,8 @@ import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -44,6 +46,15 @@ public class MainActivity extends AppCompatActivity {
     ProgressDialog pd;
     ImageView logo;
     ImageView arrow;
+    TextView num1;
+    TextView num2;
+    TextView num3;
+    TextView num4;
+    TextView num5;
+    TextView num6;
+    TextView num7;
+    TextView num8;
+    TextView num9;
     TextView num10;
     TextView num11;
     TextView num12;
@@ -54,9 +65,12 @@ public class MainActivity extends AppCompatActivity {
     TextView num17;
     TextView num18;
 
+    TextView turnOnText;
+
     TextView latText;
     TextView lonText;
 
+    TextView noInternet;
 
     TextView dText1;
     TextView dText2;
@@ -86,7 +100,8 @@ public class MainActivity extends AppCompatActivity {
     LocationListener locationListener;
 
     boolean gpsPossible = false;
-    boolean gpsPermission = false;
+//    boolean gpsPermission = false;
+    boolean gpsOn = false;
 
     double[] nwLat = new double[19];
     double[] nwLong = new double[19];
@@ -94,10 +109,22 @@ public class MainActivity extends AppCompatActivity {
     double[] bcLong = new double[19];
     double[] bloLat = new double[19];
     double[] bloLon = new double[19];
+    double[] blgLat = new double[19];
+    double[] blgLon = new double[19];
+
     int selectedClub = 0;
 
+    public static double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        long factor = (long) Math.pow(10, places);
+        value = value * factor;
+        long tmp = Math.round(value);
+        return (double) tmp / factor;
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -121,12 +148,24 @@ public class MainActivity extends AppCompatActivity {
         dText18 = findViewById(R.id.distText18);
         statusText = findViewById(R.id.gpsStatusText);
 
-        windSpeedText = findViewById(R.id.textView53);
-        windDirText = findViewById(R.id.textView54);
+        windSpeedText = findViewById(R.id.speedText);
+        windDirText = findViewById(R.id.dirText);
 
         latText = findViewById(R.id.textView55);
         lonText = findViewById(R.id.textView56);
 
+        turnOnText = findViewById(R.id.turnText);
+
+        noInternet = findViewById(R.id.noInternetText);
+        num1 = findViewById(R.id.num1);
+        num2 = findViewById(R.id.num2);
+        num3 = findViewById(R.id.num3);
+        num4 = findViewById(R.id.num4);
+        num5 = findViewById(R.id.num5);
+        num6 = findViewById(R.id.num6);
+        num7 = findViewById(R.id.num7);
+        num8 = findViewById(R.id.num8);
+        num9 = findViewById(R.id.num9);
         num10 = findViewById(R.id.num10);
         num11 = findViewById(R.id.num11);
         num12 = findViewById(R.id.num12);
@@ -137,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
         num17 = findViewById(R.id.num17);
         num18 = findViewById(R.id.num18);
 
-        northLetter = findViewById(R.id.textView2);
+        northLetter = findViewById(R.id.nText);
         logo = findViewById(R.id.logoView);
         arrow = findViewById(R.id.arrowImage);
         // Acquire a reference to the system Location Manager
@@ -153,20 +192,57 @@ public class MainActivity extends AppCompatActivity {
         // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
 
+
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                setTextToZero();
                 selectedClub = position;
                 System.out.println("Spinner selected at position: " + position);
                 if (selectedClub == 0) {
-                    hideBack9(false);
+                    if (gpsOn) {
+                        hideBack9(false);
+                        hideFront9(false);
+                        turnOnText.setVisibility(View.INVISIBLE);
+                    } else {
+                        hideBack9(true);
+                        hideFront9(true);
+                        turnOnText.setVisibility(View.VISIBLE);
+                    }
                     logo.setImageResource(R.drawable.north_west_logo);
-                } else if (selectedClub == 1){
-                    hideBack9(true);
+                } else if (selectedClub == 1) {
+                    if (gpsOn) {
+                        hideFront9(false);
+                        hideBack9(true);
+                        turnOnText.setVisibility(View.INVISIBLE);
+                    } else {
+                        hideBack9(true);
+                        hideFront9(true);
+                        turnOnText.setVisibility(View.VISIBLE);
+                    }
+
                     logo.setImageResource(R.drawable.buncrana_gc_logo);
-                }
-                else if (selectedClub == 2){
-                    hideBack9(false);
+                } else if (selectedClub == 2) {
+                    if (gpsOn) {
+                        hideBack9(false);
+                        hideFront9(false);
+                        turnOnText.setVisibility(View.INVISIBLE);
+                    } else {
+                        hideBack9(true);
+                        hideFront9(true);
+                        turnOnText.setVisibility(View.VISIBLE);
+                    }
+                    logo.setImageResource(R.drawable.bl_logo);
+                } else if (selectedClub == 3) {
+                    if (gpsOn) {
+                        hideBack9(false);
+                        hideFront9(false);
+                        turnOnText.setVisibility(View.INVISIBLE);
+                    } else {
+                        hideBack9(true);
+                        hideFront9(true);
+                        turnOnText.setVisibility(View.VISIBLE);
+                    }
                     logo.setImageResource(R.drawable.bl_logo);
                 }
             }
@@ -177,15 +253,16 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        btnHit = (Button) findViewById(R.id.btnHit);
-        txtJson = (TextView) findViewById(R.id.tvJsonItem);
-
-        btnHit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new JsonTask().execute("http://api.openweathermap.org/data/2.5/weather?id=2654332&APPID=d2f1c7fd747498a9246f9467457b722e");
-            }
-        });
+        new JsonTask().execute("http://api.openweathermap.org/data/2.5/weather?id=2654332&APPID=d2f1c7fd747498a9246f9467457b722e");
+//        btnHit = (Button) findViewById(R.id.btnHit);
+        txtJson = (TextView) findViewById(R.id.tempText);
+//
+//        btnHit.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                new JsonTask().execute("http://api.openweathermap.org/data/2.5/weather?id=2654332&APPID=d2f1c7fd747498a9246f9467457b722e");
+//            }
+//        });
 
 
 // Define a listener that responds to location updates
@@ -200,17 +277,31 @@ public class MainActivity extends AppCompatActivity {
             }
 
             public void onProviderEnabled(String provider) {
+                gpsOn = true;
                 System.out.println("Provider: " + provider + "Enabled");
                 statusText.setText("GPS Active");
                 statusText.setTextColor(Color.parseColor("#00C853"));
+                hideFront9(false);
+                turnOnText.setVisibility(View.INVISIBLE);
+                if (selectedClub == 1) {
+                    hideBack9(true);
+                } else {
+                    hideBack9(false);
+                }
             }
 
             public void onProviderDisabled(String provider) {
+                gpsOn = false;
                 System.out.println("Provider: " + provider + "Disabled");
                 statusText.setText("GPS Off");
                 statusText.setTextColor(Color.RED);
+                hideFront9(true);
+                hideBack9(true);
+                turnOnText.setVisibility(View.VISIBLE);
             }
         };
+
+        setTextToZero();
 
         if (!gpsPossible) {
             statusText.setText("No GPS Hardware Detected");
@@ -318,24 +409,62 @@ public class MainActivity extends AppCompatActivity {
         bloLon[8] = -7.367334;
         bloLat[9] = 55.291485;
         bloLon[9] = -7.371499;
-        bloLat[10] = 0;
-        bloLon[10] = 0;
-        bloLat[11] = 0;
-        bloLon[11] = 0;
-        bloLat[12] = 0;
-        bloLon[12] = 0;
-        bloLat[13] = 0;
-        bloLon[13] = 0;
-        bloLat[14] = 0;
-        bloLon[14] = 0;
-        bloLat[15] = 0;
-        bloLon[15] = 0;
-        bloLat[16] = 0;
-        bloLon[16] = 0;
-        bloLat[17] = 0;
-        bloLon[17] = 0;
-        bloLat[18] = 0;
-        bloLon[18] = 0;
+        bloLat[10] = 55.295563;
+        bloLon[10] = -7.372883;
+        bloLat[11] = 55.298276;
+        bloLon[11] = -7.371554;
+        bloLat[12] = 55.299922;
+        bloLon[12] = -7.372818;
+        bloLat[13] = 55.302784;
+        bloLon[13] = -7.375221;
+        bloLat[14] = 55.297555;
+        bloLon[14] = -7.377919;
+        bloLat[15] = 55.293921;
+        bloLon[15] = -7.378471;
+        bloLat[16] = 55.291755;
+        bloLon[16] = -7.381436;
+        bloLat[17] = 55.290570;
+        bloLon[17] = -7.381314;
+        bloLat[18] = 55.292597;
+        bloLon[18] = -7.374077;
+
+        //ballyliffin glashedy links
+        blgLat[1] = 55.294274;
+        blgLon[1] = -7.367827;
+        blgLat[2] = 55.296994;
+        blgLon[2] = -7.361751;
+        blgLat[3] = 55.298439;
+        blgLon[3] = -7.356450;
+        blgLat[4] = 55.300008;
+        blgLon[4] = -7.362289;
+        blgLat[5] = 55.300781;
+        blgLon[5] = -7.365157;
+        blgLat[6] = 55.297968;
+        blgLon[6] = -7.361918;
+        blgLat[7] = 55.297401;
+        blgLon[7] = -7.363201;
+        blgLat[8] = 55.295791;
+        blgLon[8] = -7.368021;
+        blgLat[9] = 55.293188;
+        blgLon[9] = -7.371848;
+        blgLat[10] = 55.296428;
+        blgLon[10] = -7.373940;
+        blgLat[11] = 55.299322;
+        blgLon[11] = -7.373898;
+        blgLat[12] = 55.302256;
+        blgLon[12] = -7.368775;
+        blgLat[13] = 55.299013;
+        blgLon[13] = -7.363243;
+        blgLat[14] = 55.299683;
+        blgLon[14] = -7.366701;
+        blgLat[15] = 55.301076;
+        blgLon[15] = -7.372793;
+        blgLat[16] = 55.295932;
+        blgLon[16] = -7.376213;
+        blgLat[17] = 55.291818;
+        blgLon[17] = -7.379100;
+        blgLat[18] = 55.292898;
+        blgLon[18] = -7.374770;
 
     }
 
@@ -382,6 +511,10 @@ public class MainActivity extends AppCompatActivity {
             System.out.println("returning true, and starting requestUpdates");
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1500, 1, locationListener);
             statusText.setText("GPS Working");
+            gpsOn = true;
+            hideFront9(false);
+            hideBack9(false);
+            turnOnText.setVisibility(View.INVISIBLE);
             statusText.setTextColor(Color.parseColor("#00C853"));
             return true;
         }
@@ -408,6 +541,7 @@ public class MainActivity extends AppCompatActivity {
                         statusText.setTextColor(Color.GREEN);
                         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1500, 1, locationListener);
                         statusText.setText("GPS Working");
+                        gpsOn = true;
                         statusText.setTextColor(Color.parseColor("#00C853"));
                     }
 
@@ -416,6 +550,9 @@ public class MainActivity extends AppCompatActivity {
                     System.out.println("Requested permissions, and were denied");
                     statusText.setText("Permission Denied after request!");
                     statusText.setTextColor(Color.RED);
+                    hideFront9(true);
+                    hideBack9(true);
+                    turnOnText.setVisibility(View.VISIBLE);
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.
 
@@ -424,33 +561,6 @@ public class MainActivity extends AppCompatActivity {
             }
 
         }
-    }
-
-
-    public void makeUseOfNewLocation(Location location) {
-
-        System.out.println("Received new location!");
-        double latitude = location.getLatitude();
-        double longitude = location.getLongitude();
-
-        latText.setText(String.valueOf(latitude));
-        lonText.setText(String.valueOf(longitude));
-
-        if(selectedClub == 0) {
-            setUpYardage(nwLat, nwLong, location);
-        }
-        else if(selectedClub == 1){
-            setUpYardage(bcLat, bcLong, location);
-        }
-        else if (selectedClub == 2){
-            setUpYardage(bloLat, bloLon, location);
-        }
-        else {
-            System.out.println("Error with club selection and yardage calculation");
-        }
-
-
-
     }
 
 //    public void checkGPSStatus() {
@@ -470,142 +580,36 @@ public class MainActivity extends AppCompatActivity {
 //        }
 //    }
 
+    public void makeUseOfNewLocation(Location location) {
+
+        System.out.println("Received new location!");
+        double latitude = location.getLatitude();
+        double longitude = location.getLongitude();
+
+        latText.setText(String.valueOf(latitude));
+        lonText.setText(String.valueOf(longitude));
+
+        if (selectedClub == 0) {
+            setUpYardage(nwLat, nwLong, location);
+        } else if (selectedClub == 1) {
+            setUpYardage(bcLat, bcLong, location);
+        } else if (selectedClub == 2) {
+            setUpYardage(bloLat, bloLon, location);
+        } else if (selectedClub == 3) {
+            setUpYardage(blgLat, blgLon, location);
+        } else {
+            System.out.println("Error with club selection and yardage calculation");
+        }
+
+
+    }
+
     public boolean hasGPSDevice(Context context) {
         final LocationManager mgr = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         if (mgr == null) return false;
         final List<String> providers = mgr.getAllProviders();
         if (providers == null) return false;
         return providers.contains(LocationManager.GPS_PROVIDER);
-    }
-
-
-    private class JsonTask extends AsyncTask<String, String, String> {
-
-        protected void onPreExecute() {
-            super.onPreExecute();
-
-            pd = new ProgressDialog(MainActivity.this);
-            pd.setMessage("Please wait");
-            pd.setCancelable(false);
-            pd.show();
-        }
-
-        protected String doInBackground(String... params) {
-
-
-            HttpURLConnection connection = null;
-            BufferedReader reader = null;
-
-            try {
-                URL url = new URL(params[0]);
-                connection = (HttpURLConnection) url.openConnection();
-                connection.connect();
-
-
-                InputStream stream = connection.getInputStream();
-
-                reader = new BufferedReader(new InputStreamReader(stream));
-
-                StringBuffer buffer = new StringBuffer();
-                String line = "";
-
-                while ((line = reader.readLine()) != null) {
-                    buffer.append(line + "\n");
-                    Log.d("Response: ", "> " + line);   //here u ll get whole response...... :-)
-
-                }
-
-                return buffer.toString();
-
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                if (connection != null) {
-                    connection.disconnect();
-                }
-                try {
-                    if (reader != null) {
-                        reader.close();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-            if (pd.isShowing()) {
-                pd.dismiss();
-            }
-            txtJson.setText(result);
-
-            try {
-                JSONObject jObject = new JSONObject(result);
-
-                JSONObject jMain = jObject.getJSONObject("main");
-                String temp = jMain.getString("temp");
-
-                JSONObject jWind = jObject.getJSONObject("wind");
-                String wSpeed = jWind.getString("speed");
-
-                //getting wind direction in degrees, if wind is too slow there will be no direction, so handle exception
-                String wDir = "0";
-                try {
-                    wDir = jWind.getString("deg");
-                } catch (JSONException e){
-                    e.printStackTrace();
-                    wDir = "0";
-                }
-
-
-                double convertTemp = 273.15;
-                convertTemp = Double.valueOf(temp) - convertTemp;
-                convertTemp = round(convertTemp, 1);
-                temp = String.valueOf(convertTemp);
-                System.out.println(temp);
-                txtJson.setText(temp + " °C");
-                txtJson.setVisibility(View.VISIBLE);
-
-
-                double convertWind = 3.6;
-                convertWind = Double.valueOf(wSpeed) * convertWind;
-                convertWind = round(convertWind, 1);
-                wSpeed = String.valueOf(convertWind);
-                System.out.println(wSpeed);
-                System.out.println(wDir);
-                float rotation = Float.valueOf(wDir);
-                arrow.setRotation(rotation-90f);
-                arrow.setVisibility(View.VISIBLE);
-                windSpeedText.setText("Wind Speed: " + wSpeed + " km/h");
-                windSpeedText.setVisibility(View.VISIBLE);
-                windDirText.setText("Wind Direction: " + wDir + "°");
-                windDirText.setVisibility(View.VISIBLE);
-
-                northLetter.setVisibility(View.VISIBLE);
-
-                btnHit.setClickable(false);
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-
-        }
-    }
-
-    public static double round(double value, int places) {
-        if (places < 0) throw new IllegalArgumentException();
-
-        long factor = (long) Math.pow(10, places);
-        value = value * factor;
-        long tmp = Math.round(value);
-        return (double) tmp / factor;
     }
 
     public void hideBack9(boolean bool) {
@@ -637,7 +641,36 @@ public class MainActivity extends AppCompatActivity {
         num18.setAlpha(choice);
     }
 
-    public void setUpYardage(double[] arrayLat, double[] arrayLon, Location location){
+    public void hideFront9(boolean bool) {
+
+        float choice;
+        if (bool) {
+            choice = 0.0f;
+        } else {
+            choice = 1.0f;
+        }
+        dText1.setAlpha(choice);
+        dText2.setAlpha(choice);
+        dText3.setAlpha(choice);
+        dText4.setAlpha(choice);
+        dText5.setAlpha(choice);
+        dText6.setAlpha(choice);
+        dText7.setAlpha(choice);
+        dText8.setAlpha(choice);
+        dText9.setAlpha(choice);
+
+        num1.setAlpha(choice);
+        num2.setAlpha(choice);
+        num3.setAlpha(choice);
+        num4.setAlpha(choice);
+        num5.setAlpha(choice);
+        num6.setAlpha(choice);
+        num7.setAlpha(choice);
+        num8.setAlpha(choice);
+        num9.setAlpha(choice);
+    }
+
+    public void setUpYardage(double[] arrayLat, double[] arrayLon, Location location) {
 
 
         double latitude = location.getLatitude();
@@ -762,24 +795,201 @@ public class MainActivity extends AppCompatActivity {
 
         dText1.setText(String.valueOf(roundedYardFirst) + "y");
         dText2.setText(String.valueOf(roundedYardSecond) + "y");
-        dText3.setText( String.valueOf(roundedYardThird) + "y");
-        dText4.setText( String.valueOf(roundedYardFourth) + "y");
+        dText3.setText(String.valueOf(roundedYardThird) + "y");
+        dText4.setText(String.valueOf(roundedYardFourth) + "y");
         dText5.setText(String.valueOf(roundedYardFifth) + "y");
         dText6.setText(String.valueOf(roundedYardSixth) + "y");
-        dText7.setText( String.valueOf(roundedYard7) + "y");
+        dText7.setText(String.valueOf(roundedYard7) + "y");
         dText8.setText(String.valueOf(roundedYard8) + "y");
-        dText9.setText( String.valueOf(roundedYard9) + "y");
+        dText9.setText(String.valueOf(roundedYard9) + "y");
         dText10.setText(String.valueOf(roundedYard10) + "y");
         dText11.setText(String.valueOf(roundedYard11) + "y");
         dText12.setText(String.valueOf(roundedYard12) + "y");
-        dText13.setText( String.valueOf(roundedYard13) + "y");
+        dText13.setText(String.valueOf(roundedYard13) + "y");
         dText14.setText(String.valueOf(roundedYard14) + "y");
-        dText15.setText( String.valueOf(roundedYard15) + "y");
+        dText15.setText(String.valueOf(roundedYard15) + "y");
         dText16.setText(String.valueOf(roundedYard16) + "y");
-        dText17.setText( String.valueOf(roundedYard17) + "y");
+        dText17.setText(String.valueOf(roundedYard17) + "y");
         dText18.setText(String.valueOf(roundedYard18) + "y");
 
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        locationManager.removeUpdates(locationListener);
+    }
+
+    //
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        if (!gpsPossible) {
+            statusText.setText("No GPS Hardware Detected");
+            statusText.setTextColor(Color.RED);
+        } else {
+            statusText.setText("GPS Hardware Detected");
+            statusText.setTextColor(Color.parseColor("#FBC02D"));
+//            checkGPSStatus();
+            checkLocationPermission();
+
+        }
+
+    }
+
+    public void setTextToZero() {
+        dText1.setText("0y");
+        dText2.setText("0y");
+        dText3.setText("0y");
+        dText4.setText("0y");
+        dText5.setText("0y");
+        dText6.setText("0y");
+        dText7.setText("0y");
+        dText8.setText("0y");
+        dText9.setText("0y");
+        dText10.setText("0y");
+        dText11.setText("0y");
+        dText12.setText("0y");
+        dText13.setText("0y");
+        dText14.setText("0y");
+        dText15.setText("0y");
+        dText16.setText("0y");
+        dText17.setText("0y");
+        dText18.setText("0y");
+    }
+
+    private class JsonTask extends AsyncTask<String, String, String> {
+
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            pd = new ProgressDialog(MainActivity.this);
+            pd.setMessage("Please wait");
+            pd.setCancelable(false);
+            pd.show();
+        }
+
+        protected String doInBackground(String... params) {
+
+
+            HttpURLConnection connection = null;
+            BufferedReader reader = null;
+
+            try {
+                URL url = new URL(params[0]);
+                connection = (HttpURLConnection) url.openConnection();
+                connection.connect();
+
+
+                InputStream stream = connection.getInputStream();
+
+                reader = new BufferedReader(new InputStreamReader(stream));
+
+                StringBuffer buffer = new StringBuffer();
+                String line = "";
+
+                while ((line = reader.readLine()) != null) {
+                    buffer.append(line + "\n");
+                    Log.d("Response: ", "> " + line);   //here u ll get whole response...... :-)
+
+                }
+
+                return buffer.toString();
+
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                if (connection != null) {
+                    connection.disconnect();
+                }
+                try {
+                    if (reader != null) {
+                        reader.close();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return "";
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            if (pd.isShowing()) {
+                pd.dismiss();
+            }
+//            txtJson.setText(result);
+
+            if(isNetworkAvailable()) {
+
+
+                try {
+                    JSONObject jObject = new JSONObject(result);
+
+                    JSONObject jMain = jObject.getJSONObject("main");
+                    String temp = jMain.getString("temp");
+
+                    JSONObject jWind = jObject.getJSONObject("wind");
+                    String wSpeed = jWind.getString("speed");
+
+                    //getting wind direction in degrees, if wind is too slow there will be no direction, so handle exception
+                    String wDir = "0";
+                    try {
+                        wDir = jWind.getString("deg");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        wDir = "0";
+                    }
+
+
+                    double convertTemp = 273.15;
+                    convertTemp = Double.valueOf(temp) - convertTemp;
+                    convertTemp = round(convertTemp, 1);
+                    temp = String.valueOf(convertTemp);
+                    System.out.println(temp);
+                    txtJson.setText(temp + " °C");
+                    txtJson.setVisibility(View.VISIBLE);
+
+
+                    double convertWind = 3.6;
+                    convertWind = Double.valueOf(wSpeed) * convertWind;
+                    convertWind = round(convertWind, 1);
+                    wSpeed = String.valueOf(convertWind);
+                    System.out.println(wSpeed);
+                    System.out.println(wDir);
+                    float rotation = Float.valueOf(wDir);
+                    arrow.setRotation(rotation - 90f);
+                    arrow.setVisibility(View.VISIBLE);
+                    windSpeedText.setText("Wind Speed: " + wSpeed + " km/h");
+                    windSpeedText.setVisibility(View.VISIBLE);
+//                    windDirText.setText("Wind Direction: " + wDir + "°");
+//                    windDirText.setVisibility(View.VISIBLE);
+
+                    northLetter.setVisibility(View.VISIBLE);
+
+//                    btnHit.setClickable(false);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            else {
+                noInternet.setVisibility(View.VISIBLE);
+
+            }
+
+        }
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
 
 }
