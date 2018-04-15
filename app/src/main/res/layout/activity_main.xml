@@ -32,7 +32,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="42dp"
         android:contentDescription="Background Two"
         android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -284,12 +284,13 @@
         android:id="@+id/clubSpinner"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="22dp"
+        android:layout_marginStart="2dp"
         android:layout_marginTop="8dp"
         android:backgroundTint="@android:color/holo_red_dark"
         android:hapticFeedbackEnabled="true"
-        android:padding="4dp"
 
+        android:padding="4dp"
         app:layout_constraintEnd_toStartOf="@+id/gpsStatusText"
         app:layout_constraintStart_toEndOf="@+id/logoView"
         app:layout_constraintTop_toTopOf="parent" />
@@ -574,12 +575,12 @@
         android:id="@+id/speedText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="2dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="24dp"
         android:text="Wind Speed: 17 km/h"
         android:textColor="@android:color/black"
-        android:textSize="14sp"
+        android:textSize="12sp"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/imageView2"
         app:layout_constraintEnd_toEndOf="@+id/imageView2"
@@ -652,12 +653,12 @@
 
     <ImageView
         android:id="@+id/arrowImage"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:layout_marginBottom="8dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="4dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="6dp"
         android:contentDescription="Arrow Direction For Wind"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/imageView2"
@@ -719,7 +720,7 @@
         android:id="@+id/weatherText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
+        android:layout_marginBottom="2dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:text="Weather"
@@ -805,603 +806,457 @@
         android:id="@+id/back1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="2dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="12dp"
         android:fontFamily="sans-serif"
         android:text="259"
         android:textAllCaps="false"
         android:textSize="11sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toEndOf="@+id/distText1"
-        app:layout_constraintTop_toTopOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/greenText" />
 
     <TextView
         android:id="@+id/front1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="2dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="1dp"
         android:fontFamily="sans-serif"
         android:text="235"
         android:textSize="11sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/distText2"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toEndOf="@+id/distText1"
-        app:layout_constraintTop_toBottomOf="@+id/back1"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/back1" />
 
     <TextView
         android:id="@+id/back2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="2dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="5dp"
         android:fontFamily="sans-serif"
         android:text="281"
         android:textSize="11sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintHorizontal_bias="0.1"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintStart_toEndOf="@+id/distText2"
-        app:layout_constraintTop_toBottomOf="@+id/front1" />
+        app:layout_constraintTop_toBottomOf="@+id/num1"/>
 
     <TextView
         android:id="@+id/front2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="2dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="2dp"
         android:fontFamily="sans-serif"
         android:text="248"
         android:textSize="11sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/distText3"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintHorizontal_bias="0.1"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
         app:layout_constraintStart_toEndOf="@+id/distText2"
-        app:layout_constraintTop_toBottomOf="@+id/back2"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/num1"/>
 
     <TextView
         android:id="@+id/back3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="2dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="3dp"
         android:fontFamily="sans-serif"
         android:text="274"
         android:textSize="11sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintHorizontal_bias="0.1"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintStart_toEndOf="@+id/distText3"
-        app:layout_constraintTop_toBottomOf="@+id/front2" />
+        app:layout_constraintTop_toBottomOf="@+id/num2"/>
 
     <TextView
         android:id="@+id/front3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="2dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="2dp"
         android:fontFamily="sans-serif"
         android:text="237"
         android:textSize="11sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/distText4"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintHorizontal_bias="0.1"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
         app:layout_constraintStart_toEndOf="@+id/distText3"
-        app:layout_constraintTop_toBottomOf="@+id/back3"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/num2" />
 
     <TextView
         android:id="@+id/back4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="2dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="3dp"
         android:fontFamily="sans-serif"
         android:text="289"
         android:textSize="11sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintHorizontal_bias="0.1"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintStart_toEndOf="@+id/distText4"
-        app:layout_constraintTop_toBottomOf="@+id/front3" />
+        app:layout_constraintTop_toBottomOf="@+id/num3" />
 
     <TextView
         android:id="@+id/front4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="2dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="2dp"
         android:fontFamily="sans-serif"
         android:text="265"
         android:textSize="11sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/distText5"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintHorizontal_bias="0.1"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
         app:layout_constraintStart_toEndOf="@+id/distText4"
-        app:layout_constraintTop_toBottomOf="@+id/back4"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/num3"/>
 
     <TextView
         android:id="@+id/back5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="2dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="3dp"
         android:fontFamily="sans-serif"
         android:text="293"
         android:textSize="11sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintHorizontal_bias="0.1"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintStart_toEndOf="@+id/distText5"
-        app:layout_constraintTop_toBottomOf="@+id/front4" />
+        app:layout_constraintTop_toBottomOf="@+id/num4"/>
 
     <TextView
         android:id="@+id/front5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="2dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="2dp"
         android:fontFamily="sans-serif"
         android:text="253"
         android:textSize="11sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/distText6"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintHorizontal_bias="0.1"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
         app:layout_constraintStart_toEndOf="@+id/distText5"
-        app:layout_constraintTop_toBottomOf="@+id/back5"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/num4"/>
 
     <TextView
         android:id="@+id/back6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="2dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
         android:fontFamily="sans-serif"
         android:text="299"
         android:textSize="11sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintHorizontal_bias="0.1"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintStart_toEndOf="@+id/distText6"
-        app:layout_constraintTop_toBottomOf="@+id/front5" />
+        app:layout_constraintTop_toBottomOf="@+id/num5"/>
 
     <TextView
         android:id="@+id/front6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="2dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="2dp"
         android:fontFamily="sans-serif"
         android:text="243"
         android:textSize="11sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/distText7"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintHorizontal_bias="0.1"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
         app:layout_constraintStart_toEndOf="@+id/distText6"
-        app:layout_constraintTop_toBottomOf="@+id/back6"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/num5"/>
 
     <TextView
         android:id="@+id/back7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="2dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="3dp"
         android:fontFamily="sans-serif"
         android:text="295"
         android:textSize="11sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintHorizontal_bias="0.1"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintStart_toEndOf="@+id/distText7"
-        app:layout_constraintTop_toBottomOf="@+id/front6" />
+        app:layout_constraintTop_toBottomOf="@+id/num6"/>
 
     <TextView
         android:id="@+id/front7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="2dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="2dp"
         android:fontFamily="sans-serif"
         android:text="245"
         android:textSize="11sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/distText8"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintHorizontal_bias="0.1"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
         app:layout_constraintStart_toEndOf="@+id/distText7"
-        app:layout_constraintTop_toBottomOf="@+id/back7"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/num6"/>
 
     <TextView
         android:id="@+id/back8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="2dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="12dp"
         android:fontFamily="sans-serif"
         android:text="280"
         android:textSize="11sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toEndOf="@+id/distText8"
-        app:layout_constraintTop_toBottomOf="@+id/front7" />
+        app:layout_constraintTop_toBottomOf="@+id/num7" />
 
     <TextView
         android:id="@+id/front8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="2dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="28dp"
         android:fontFamily="sans-serif"
         android:text="286"
         android:textSize="11sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/distText9"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toEndOf="@+id/distText8"
-        app:layout_constraintTop_toBottomOf="@+id/back8"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/num7" />
 
     <TextView
         android:id="@+id/back9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="2dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="12dp"
         android:fontFamily="sans-serif"
         android:text="290"
         android:textSize="11sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toEndOf="@+id/distText9"
-        app:layout_constraintTop_toBottomOf="@+id/front8" />
+        app:layout_constraintTop_toBottomOf="@+id/num8" />
 
     <TextView
         android:id="@+id/front9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="2dp"
-        android:layout_marginEnd="2dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="2dp"
+
         android:fontFamily="sans-serif"
         android:text="250"
         android:textSize="11sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/weatherText"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintHorizontal_bias="0.1"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
         app:layout_constraintStart_toEndOf="@+id/distText9"
-        app:layout_constraintTop_toBottomOf="@+id/back9"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/num8" />
 
     <TextView
         android:id="@+id/back10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="12dp"
         android:fontFamily="sans-serif"
         android:text="280"
         android:textSize="11sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toEndOf="@+id/distText10"
-        app:layout_constraintTop_toTopOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/greenText" />
 
     <TextView
         android:id="@+id/front10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="2dp"
-        android:layout_marginEnd="16dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="1dp"
         android:fontFamily="sans-serif"
         android:text="250"
         android:textSize="11sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/distText11"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toEndOf="@+id/distText10"
-        app:layout_constraintTop_toBottomOf="@+id/back10"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/back10" />
 
     <TextView
         android:id="@+id/back11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
         android:fontFamily="sans-serif"
         android:text="280"
         android:textSize="11sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintStart_toEndOf="@+id/distText11"
-        app:layout_constraintTop_toBottomOf="@+id/front10" />
+        app:layout_constraintTop_toBottomOf="@+id/num10" />
 
     <TextView
         android:id="@+id/front11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="2dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="2dp"
         android:fontFamily="sans-serif"
         android:text="252"
         android:textSize="11sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/distText12"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
         app:layout_constraintStart_toEndOf="@+id/distText11"
-        app:layout_constraintTop_toBottomOf="@+id/back11"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/num10"/>
 
     <TextView
         android:id="@+id/back12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="3dp"
         android:text="290"
         android:textSize="11sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintStart_toEndOf="@+id/distText12"
-        app:layout_constraintTop_toBottomOf="@+id/front11" />
+        app:layout_constraintTop_toBottomOf="@+id/num11" />
 
     <TextView
         android:id="@+id/front12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="2dp"
         android:text="250"
         android:textSize="11sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/distText13"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
         app:layout_constraintStart_toEndOf="@+id/distText12"
-        app:layout_constraintTop_toBottomOf="@+id/back12"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/num11" />
 
     <TextView
         android:id="@+id/back13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="3dp"
         android:text="290"
         android:textSize="11sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintStart_toEndOf="@+id/distText13"
-        app:layout_constraintTop_toBottomOf="@+id/front12" />
+        app:layout_constraintTop_toBottomOf="@+id/num12" />
 
     <TextView
         android:id="@+id/front13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="2dp"
         android:text="230"
         android:textSize="11sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/distText14"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
         app:layout_constraintStart_toEndOf="@+id/distText13"
-        app:layout_constraintTop_toBottomOf="@+id/back13"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/num12"/>
 
     <TextView
         android:id="@+id/back14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="3dp"
         android:text="390"
         android:textSize="11sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintStart_toEndOf="@+id/distText14"
-        app:layout_constraintTop_toBottomOf="@+id/front13" />
+        app:layout_constraintTop_toBottomOf="@+id/num13"/>
 
     <TextView
         android:id="@+id/front14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="2dp"
         android:text="320"
         android:textSize="11sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/distText15"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
         app:layout_constraintStart_toEndOf="@+id/distText14"
-        app:layout_constraintTop_toBottomOf="@+id/back14"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/num13"/>
 
     <TextView
         android:id="@+id/back15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="3dp"
         android:text="240"
         android:textSize="11sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintStart_toEndOf="@+id/distText15"
-        app:layout_constraintTop_toBottomOf="@+id/front14" />
+        app:layout_constraintTop_toBottomOf="@+id/num14"/>
 
     <TextView
         android:id="@+id/front15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="2dp"
         android:text="230"
         android:textSize="11sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/distText16"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
         app:layout_constraintStart_toEndOf="@+id/distText15"
-        app:layout_constraintTop_toBottomOf="@+id/back15"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/num14"/>
 
     <TextView
         android:id="@+id/back16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="3dp"
         android:text="280"
         android:textSize="11sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintStart_toEndOf="@+id/distText16"
-        app:layout_constraintTop_toBottomOf="@+id/front15" />
+        app:layout_constraintTop_toBottomOf="@+id/num15"/>
 
     <TextView
         android:id="@+id/front16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="2dp"
         android:text="230"
         android:textSize="11sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/distText17"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
         app:layout_constraintStart_toEndOf="@+id/distText16"
-        app:layout_constraintTop_toBottomOf="@+id/back16"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/num15" />
 
     <TextView
         android:id="@+id/back17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
         android:text="277"
         android:textSize="11sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintStart_toEndOf="@+id/distText17"
-        app:layout_constraintTop_toBottomOf="@+id/front16" />
+        app:layout_constraintTop_toBottomOf="@+id/num16" />
 
     <TextView
         android:id="@+id/front17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="2dp"
         android:text="238"
         android:textSize="11sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
         app:layout_constraintStart_toEndOf="@+id/distText17"
-        app:layout_constraintTop_toBottomOf="@+id/back17" />
+        app:layout_constraintTop_toBottomOf="@+id/num16"/>
 
     <TextView
         android:id="@+id/back18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
         android:text="290"
         android:textSize="11sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintStart_toEndOf="@+id/distText18"
-        app:layout_constraintTop_toBottomOf="@+id/front17" />
+        app:layout_constraintTop_toBottomOf="@+id/num17" />
 
     <TextView
         android:id="@+id/front18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="2dp"
         android:text="230"
         android:textSize="11sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
         app:layout_constraintStart_toEndOf="@+id/distText18"
-        app:layout_constraintTop_toBottomOf="@+id/back18" />
+        app:layout_constraintTop_toBottomOf="@+id/num17" />
 
     <TextView
         android:id="@+id/textView38"
@@ -1411,6 +1266,7 @@
         android:layout_marginTop="2dp"
         android:text="Back"
         android:textSize="10sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/greenText"
         app:layout_constraintTop_toBottomOf="@+id/clubSpinner" />
 
@@ -1421,6 +1277,7 @@
         android:layout_marginTop="2dp"
         android:text="Front"
         android:textSize="10sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/textView38"
         app:layout_constraintTop_toBottomOf="@+id/textView38" />
 

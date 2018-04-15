@@ -140,9 +140,18 @@ public class MainActivity extends AppCompatActivity {
 
     double[] nwLat = new double[19];
     double[] nwLong = new double[19];
+    double[] nwBLat = new double[19];
+    double[] nwBLong = new double[19];
+    double[] nwFLat = new double[19];
+    double[] nwFLong = new double[19];
 
     double[] bcLat = new double[19];
     double[] bcLong = new double[19];
+    double[] bcBLat = new double[19];
+    double[] bcBLong = new double[19];
+    double[] bcFLat = new double[19];
+    double[] bcFLong = new double[19];
+
 
     double[] bloLat = new double[19];
     double[] bloLon = new double[19];
@@ -581,8 +590,11 @@ public class MainActivity extends AppCompatActivity {
 
         if (selectedClub == 0) {
             setUpYardage(nwLat, nwLong, location);
+            setUpBackFrontYardage(nwBLat, nwBLong, nwFLat, nwFLong, location);
         } else if (selectedClub == 1) {
+            hideBack9(true);
             setUpYardage(bcLat, bcLong, location);
+            setUpBackFrontYardage(bcBLat, bcBLong, bcFLat, bcFLong, location);
         } else if (selectedClub == 2) {
             setUpYardage(bloLat, bloLon, location);
             setUpBackFrontYardage(bloBLat, bloBLon, bloFLat, bloFLon, location);
@@ -786,24 +798,51 @@ public class MainActivity extends AppCompatActivity {
         float yards17 = distance17[0] * 1.093f;
         float yards18 = distance18[0] * 1.093f;
 
-        int roundedYard1 = (int) (yards1 + 0.5);
-        int roundedYard2 = (int) (yards2 + 0.5);
-        int roundedYard3 = (int) (yards3 + 0.5);
-        int roundedYard4 = (int) (yards4 + 0.5);
-        int roundedYard5 = (int) (yards5 + 0.5);
-        int roundedYard6 = (int) (yards6 + 0.5);
-        int roundedYard7 = (int) (yards7 + 0.5);
-        int roundedYard8 = (int) (yards8 + 0.5);
-        int roundedYard9 = (int) (yards9 + 0.5);
-        int roundedYard10 = (int) (yards10 + 0.5);
-        int roundedYard11 = (int) (yards11 + 0.5);
-        int roundedYard12 = (int) (yards12 + 0.5);
-        int roundedYard13 = (int) (yards13 + 0.5);
-        int roundedYard14 = (int) (yards14 + 0.5);
-        int roundedYard15 = (int) (yards15 + 0.5);
-        int roundedYard16 = (int) (yards16 + 0.5);
-        int roundedYard17 = (int) (yards17 + 0.5);
-        int roundedYard18 = (int) (yards18 + 0.5);
+        int[] roundedYardArray = new int[19];
+
+        roundedYardArray[1] = (int) (yards1 + 0.5);
+        roundedYardArray[2] = (int) (yards2 + 0.5);
+        roundedYardArray[3] = (int) (yards3 + 0.5);
+        roundedYardArray[4] = (int) (yards4 + 0.5);
+        roundedYardArray[5] = (int) (yards5 + 0.5);
+        roundedYardArray[6] = (int) (yards6 + 0.5);
+        roundedYardArray[7] = (int) (yards7 + 0.5);
+        roundedYardArray[8] = (int) (yards8 + 0.5);
+        roundedYardArray[9] = (int) (yards9 + 0.5);
+        roundedYardArray[10] = (int) (yards10 + 0.5);
+        roundedYardArray[11] = (int) (yards11 + 0.5);
+        roundedYardArray[12] = (int) (yards12 + 0.5);
+        roundedYardArray[13] = (int) (yards13 + 0.5);
+        roundedYardArray[14] = (int) (yards14 + 0.5);
+        roundedYardArray[15] = (int) (yards15 + 0.5);
+        roundedYardArray[16] = (int) (yards16 + 0.5);
+        roundedYardArray[17] = (int) (yards17 + 0.5);
+        roundedYardArray[18] = (int) (yards18 + 0.5);
+
+        for(int i = 0; i<19; i++){
+            if (roundedYardArray[i] <= 2){
+                roundedYardArray[i] = 0;
+            }
+        }
+        for(int i = 0; i<19; i++){
+            if (roundedYardArray[i] > 10000){
+                roundedYardArray[i] = 10000;
+            }
+        }
+
+        String[] roundedYardArrayString = new String[19];
+
+        for(int i = 0; i< 19; i++){
+            if(roundedYardArray[i] == 10000){
+                roundedYardArrayString[i] = "10000+";
+            }
+            else {
+                roundedYardArrayString[i] = String.valueOf(roundedYardArray[i]);
+            }
+        }
+
+
+
 
 //        dText1.setText(String.valueOf(roundedMetreFirst) + "m   " + String.valueOf(roundedYard1) + "y");
 //        dText2.setText(String.valueOf(roundedMetreSecond) + "m   " + String.valueOf(roundedYard2) + "y");
@@ -824,26 +863,24 @@ public class MainActivity extends AppCompatActivity {
 //        dText17.setText(String.valueOf(roundedMetre17) + "m   " + String.valueOf(roundedYard17) + "y");
 //        dText18.setText(String.valueOf(roundedMetre18) + "m   " + String.valueOf(roundedYard18) + "y");
 
-        dText1.setText(String.valueOf(roundedYard1) + "y");
-        dText2.setText(String.valueOf(roundedYard2) + "y");
-        dText3.setText(String.valueOf(roundedYard3) + "y");
-        dText4.setText(String.valueOf(roundedYard4) + "y");
-        dText5.setText(String.valueOf(roundedYard5) + "y");
-        dText6.setText(String.valueOf(roundedYard6) + "y");
-        dText7.setText(String.valueOf(roundedYard7) + "y");
-        dText8.setText(String.valueOf(roundedYard8) + "y");
-        dText9.setText(String.valueOf(roundedYard9) + "y");
-        dText10.setText(String.valueOf(roundedYard10) + "y");
-        dText11.setText(String.valueOf(roundedYard11) + "y");
-        dText12.setText(String.valueOf(roundedYard12) + "y");
-        dText13.setText(String.valueOf(roundedYard13) + "y");
-        dText14.setText(String.valueOf(roundedYard14) + "y");
-        dText15.setText(String.valueOf(roundedYard15) + "y");
-        dText16.setText(String.valueOf(roundedYard16) + "y");
-        dText17.setText(String.valueOf(roundedYard17) + "y");
-        dText18.setText(String.valueOf(roundedYard18) + "y");
-
-
+        dText1.setText(roundedYardArrayString[1] + "y");
+        dText2.setText(roundedYardArrayString[2] + "y");
+        dText3.setText(roundedYardArrayString[3] + "y");
+        dText4.setText(roundedYardArrayString[4] + "y");
+        dText5.setText(roundedYardArrayString[5] + "y");
+        dText6.setText(roundedYardArrayString[6] + "y");
+        dText7.setText(roundedYardArrayString[7] + "y");
+        dText8.setText(roundedYardArrayString[8] + "y");
+        dText9.setText(roundedYardArrayString[9] + "y");
+        dText10.setText(roundedYardArrayString[10] + "y");
+        dText11.setText(roundedYardArrayString[11] + "y");
+        dText12.setText(roundedYardArrayString[12] + "y");
+        dText13.setText(roundedYardArrayString[13] + "y");
+        dText14.setText(roundedYardArrayString[14] + "y");
+        dText15.setText(roundedYardArrayString[15] + "y");
+        dText16.setText(roundedYardArrayString[16] + "y");
+        dText17.setText(roundedYardArrayString[17] + "y");
+        dText18.setText(roundedYardArrayString[18] + "y");
 
     }
 
@@ -852,196 +889,232 @@ public class MainActivity extends AppCompatActivity {
         double latitude = location.getLatitude();
         double longitude = location.getLongitude();
 
-        float[] Bdistance1 = new float[1];
-        float[] Bdistance2 = new float[1];
-        float[] Bdistance3 = new float[1];
-        float[] Bdistance4 = new float[1];
-        float[] Bdistance5 = new float[1];
-        float[] Bdistance6 = new float[1];
-        float[] Bdistance7 = new float[1];
-        float[] Bdistance8 = new float[1];
-        float[] Bdistance9 = new float[1];
-        float[] Bdistance10 = new float[1];
-        float[] Bdistance11 = new float[1];
-        float[] Bdistance12 = new float[1];
-        float[] Bdistance13 = new float[1];
-        float[] Bdistance14 = new float[1];
-        float[] Bdistance15 = new float[1];
-        float[] Bdistance16 = new float[1];
-        float[] Bdistance17 = new float[1];
-        float[] Bdistance18 = new float[1];
-
-        float[] Fdistance1 = new float[1];
-        float[] Fdistance2 = new float[1];
-        float[] Fdistance3 = new float[1];
-        float[] Fdistance4 = new float[1];
-        float[] Fdistance5 = new float[1];
-        float[] Fdistance6 = new float[1];
-        float[] Fdistance7 = new float[1];
-        float[] Fdistance8 = new float[1];
-        float[] Fdistance9 = new float[1];
-        float[] Fdistance10 = new float[1];
-        float[] Fdistance11 = new float[1];
-        float[] Fdistance12 = new float[1];
-        float[] Fdistance13 = new float[1];
-        float[] Fdistance14 = new float[1];
-        float[] Fdistance15 = new float[1];
-        float[] Fdistance16 = new float[1];
-        float[] Fdistance17 = new float[1];
-        float[] Fdistance18 = new float[1];
-
-        Location.distanceBetween(backLat[1], backLon[1], latitude, longitude, Bdistance1);
-        Location.distanceBetween(backLat[2], backLon[2], latitude, longitude, Bdistance2);
-        Location.distanceBetween(backLat[3], backLon[3], latitude, longitude, Bdistance3);
-        Location.distanceBetween(backLat[4], backLon[4], latitude, longitude, Bdistance4);
-        Location.distanceBetween(backLat[5], backLon[5], latitude, longitude, Bdistance5);
-        Location.distanceBetween(backLat[6], backLon[6], latitude, longitude, Bdistance6);
-        Location.distanceBetween(backLat[7], backLon[7], latitude, longitude, Bdistance7);
-        Location.distanceBetween(backLat[8], backLon[8], latitude, longitude, Bdistance8);
-        Location.distanceBetween(backLat[9], backLon[9], latitude, longitude, Bdistance9);
-        Location.distanceBetween(backLat[10], backLon[10], latitude, longitude, Bdistance10);
-        Location.distanceBetween(backLat[11], backLon[11], latitude, longitude, Bdistance11);
-        Location.distanceBetween(backLat[12], backLon[12], latitude, longitude, Bdistance12);
-        Location.distanceBetween(backLat[13], backLon[13], latitude, longitude, Bdistance13);
-        Location.distanceBetween(backLat[14], backLon[14], latitude, longitude, Bdistance14);
-        Location.distanceBetween(backLat[15], backLon[15], latitude, longitude, Bdistance15);
-        Location.distanceBetween(backLat[16], backLon[16], latitude, longitude, Bdistance16);
-        Location.distanceBetween(backLat[17], backLon[17], latitude, longitude, Bdistance17);
-        Location.distanceBetween(backLat[18], backLon[18], latitude, longitude, Bdistance18);
-
-        Location.distanceBetween(frontLat[1], frontLon[1], latitude, longitude, Fdistance1);
-        Location.distanceBetween(frontLat[2], frontLon[2], latitude, longitude, Fdistance2);
-        Location.distanceBetween(frontLat[3], frontLon[3], latitude, longitude, Fdistance3);
-        Location.distanceBetween(frontLat[4], frontLon[4], latitude, longitude, Fdistance4);
-        Location.distanceBetween(frontLat[5], frontLon[5], latitude, longitude, Fdistance5);
-        Location.distanceBetween(frontLat[6], frontLon[6], latitude, longitude, Fdistance6);
-        Location.distanceBetween(frontLat[7], frontLon[7], latitude, longitude, Fdistance7);
-        Location.distanceBetween(frontLat[8], frontLon[8], latitude, longitude, Fdistance8);
-        Location.distanceBetween(frontLat[9], frontLon[9], latitude, longitude, Fdistance9);
-        Location.distanceBetween(frontLat[10], frontLon[10], latitude, longitude, Fdistance10);
-        Location.distanceBetween(frontLat[11], frontLon[11], latitude, longitude, Fdistance11);
-        Location.distanceBetween(frontLat[12], frontLon[12], latitude, longitude, Fdistance12);
-        Location.distanceBetween(frontLat[13], frontLon[13], latitude, longitude, Fdistance13);
-        Location.distanceBetween(frontLat[14], frontLon[14], latitude, longitude, Fdistance14);
-        Location.distanceBetween(frontLat[15], frontLon[15], latitude, longitude, Fdistance15);
-        Location.distanceBetween(frontLat[16], frontLon[16], latitude, longitude, Fdistance16);
-        Location.distanceBetween(frontLat[17], frontLon[17], latitude, longitude, Fdistance17);
-        Location.distanceBetween(frontLat[18], frontLon[18], latitude, longitude, Fdistance18);
+//        float[][] = new float[19];
+        float[][] bDistance = new float[19][1];
+        float[][] fDistance = new float[19][1];
 
 
-        float Byards1 = Bdistance1[0] * 1.093f;
-        float Byards2 = Bdistance2[0] * 1.093f;
-        float Byards3 = Bdistance3[0] * 1.093f;
-        float Byards4 = Bdistance4[0] * 1.093f;
-        float Byards5 = Bdistance5[0] * 1.093f;
-        float Byards6 = Bdistance6[0] * 1.093f;
-        float Byards7 = Bdistance7[0] * 1.093f;
-        float Byards8 = Bdistance8[0] * 1.093f;
-        float Byards9 = Bdistance9[0] * 1.093f;
-        float Byards10 = Bdistance10[0] * 1.093f;
-        float Byards11 = Bdistance11[0] * 1.093f;
-        float Byards12 = Bdistance12[0] * 1.093f;
-        float Byards13 = Bdistance13[0] * 1.093f;
-        float Byards14 = Bdistance14[0] * 1.093f;
-        float Byards15 = Bdistance15[0] * 1.093f;
-        float Byards16 = Bdistance16[0] * 1.093f;
-        float Byards17 = Bdistance17[0] * 1.093f;
-        float Byards18 = Bdistance18[0] * 1.093f;
+//        float[] Bdistance1 = new float[1];
+//        float[] Bdistance2 = new float[1];
+//        float[] Bdistance3 = new float[1];
+//        float[] Bdistance4 = new float[1];
+//        float[] Bdistance5 = new float[1];
+//        float[] Bdistance6 = new float[1];
+//        float[] Bdistance7 = new float[1];
+//        float[] Bdistance8 = new float[1];
+//        float[] Bdistance9 = new float[1];
+//        float[] Bdistance10 = new float[1];
+//        float[] Bdistance11 = new float[1];
+//        float[] Bdistance12 = new float[1];
+//        float[] Bdistance13 = new float[1];
+//        float[] Bdistance14 = new float[1];
+//        float[] Bdistance15 = new float[1];
+//        float[] Bdistance16 = new float[1];
+//        float[] Bdistance17 = new float[1];
+//        float[] Bdistance18 = new float[1];
 
-        float Fyards1 = Fdistance1[0] * 1.093f;
-        float Fyards2 = Fdistance2[0] * 1.093f;
-        float Fyards3 = Fdistance3[0] * 1.093f;
-        float Fyards4 = Fdistance4[0] * 1.093f;
-        float Fyards5 = Fdistance5[0] * 1.093f;
-        float Fyards6 = Fdistance6[0] * 1.093f;
-        float Fyards7 = Fdistance7[0] * 1.093f;
-        float Fyards8 = Fdistance8[0] * 1.093f;
-        float Fyards9 = Fdistance9[0] * 1.093f;
-        float Fyards10 = Fdistance10[0] * 1.093f;
-        float Fyards11 = Fdistance11[0] * 1.093f;
-        float Fyards12 = Fdistance12[0] * 1.093f;
-        float Fyards13 = Fdistance13[0] * 1.093f;
-        float Fyards14 = Fdistance14[0] * 1.093f;
-        float Fyards15 = Fdistance15[0] * 1.093f;
-        float Fyards16 = Fdistance16[0] * 1.093f;
-        float Fyards17 = Fdistance17[0] * 1.093f;
-        float Fyards18 = Fdistance18[0] * 1.093f;
+//        float[] Fdistance1 = new float[1];
+//        float[] Fdistance2 = new float[1];
+//        float[] Fdistance3 = new float[1];
+//        float[] Fdistance4 = new float[1];
+//        float[] Fdistance5 = new float[1];
+//        float[] Fdistance6 = new float[1];
+//        float[] Fdistance7 = new float[1];
+//        float[] Fdistance8 = new float[1];
+//        float[] Fdistance9 = new float[1];
+//        float[] Fdistance10 = new float[1];
+//        float[] Fdistance11 = new float[1];
+//        float[] Fdistance12 = new float[1];
+//        float[] Fdistance13 = new float[1];
+//        float[] Fdistance14 = new float[1];
+//        float[] Fdistance15 = new float[1];
+//        float[] Fdistance16 = new float[1];
+//        float[] Fdistance17 = new float[1];
+//        float[] Fdistance18 = new float[1];
 
-        int BroundedYard1 = (int) (Byards1 + 0.5);
-        int BroundedYard2 = (int) (Byards2 + 0.5);
-        int BroundedYard3 = (int) (Byards3 + 0.5);
-        int BroundedYard4 = (int) (Byards4 + 0.5);
-        int BroundedYard5 = (int) (Byards5 + 0.5);
-        int BroundedYard6 = (int) (Byards6 + 0.5);
-        int BroundedYard7 = (int) (Byards7 + 0.5);
-        int BroundedYard8 = (int) (Byards8 + 0.5);
-        int BroundedYard9 = (int) (Byards9 + 0.5);
-        int BroundedYard10 = (int) (Byards10 + 0.5);
-        int BroundedYard11 = (int) (Byards11 + 0.5);
-        int BroundedYard12 = (int) (Byards12 + 0.5);
-        int BroundedYard13 = (int) (Byards13 + 0.5);
-        int BroundedYard14 = (int) (Byards14 + 0.5);
-        int BroundedYard15 = (int) (Byards15 + 0.5);
-        int BroundedYard16 = (int) (Byards16 + 0.5);
-        int BroundedYard17 = (int) (Byards17 + 0.5);
-        int BroundedYard18 = (int) (Byards18 + 0.5);
+        for(int i = 1; i <19; i++){
+            Location.distanceBetween(backLat[i], backLon[i], latitude, longitude, bDistance[i]);
+            Location.distanceBetween(frontLat[i], frontLon[i], latitude, longitude, fDistance[i]);
+        }
+//        Location.distanceBetween(backLat[1], backLon[1], latitude, longitude, bDistance[1]);
+//        Location.distanceBetween(backLat[2], backLon[2], latitude, longitude, bDistance[2]);
+//        Location.distanceBetween(backLat[3], backLon[3], latitude, longitude, bDistance[3]);
+//        Location.distanceBetween(backLat[4], backLon[4], latitude, longitude, bDistance[4]);
+//        Location.distanceBetween(backLat[5], backLon[5], latitude, longitude, bDistance[5]);
+//        Location.distanceBetween(backLat[6], backLon[6], latitude, longitude, bDistance[6]);
+//        Location.distanceBetween(backLat[7], backLon[7], latitude, longitude, bDistance[7]);
+//        Location.distanceBetween(backLat[8], backLon[8], latitude, longitude, bDistance[8]);
+//        Location.distanceBetween(backLat[9], backLon[9], latitude, longitude, bDistance[9]);
+//        Location.distanceBetween(backLat[10], backLon[10], latitude, longitude, bDistance[10]);
+//        Location.distanceBetween(backLat[11], backLon[11], latitude, longitude, bDistance[11]);
+//        Location.distanceBetween(backLat[12], backLon[12], latitude, longitude, bDistance[12]);
+//        Location.distanceBetween(backLat[13], backLon[13], latitude, longitude, bDistance[13]);
+//        Location.distanceBetween(backLat[14], backLon[14], latitude, longitude, bDistance[14]);
+//        Location.distanceBetween(backLat[15], backLon[15], latitude, longitude, bDistance[15]);
+//        Location.distanceBetween(backLat[16], backLon[16], latitude, longitude, bDistance[16]);
+//        Location.distanceBetween(backLat[17], backLon[17], latitude, longitude, bDistance[17]);
+//        Location.distanceBetween(backLat[18], backLon[18], latitude, longitude, bDistance[18]);
 
-        int FroundedYard1 = (int) (Fyards1 + 0.5);
-        int FroundedYard2 = (int) (Fyards2 + 0.5);
-        int FroundedYard3 = (int) (Fyards3 + 0.5);
-        int FroundedYard4 = (int) (Fyards4 + 0.5);
-        int FroundedYard5 = (int) (Fyards5 + 0.5);
-        int FroundedYard6 = (int) (Fyards6 + 0.5);
-        int FroundedYard7 = (int) (Fyards7 + 0.5);
-        int FroundedYard8 = (int) (Fyards8 + 0.5);
-        int FroundedYard9 = (int) (Fyards9 + 0.5);
-        int FroundedYard10 = (int) (Fyards10 + 0.5);
-        int FroundedYard11 = (int) (Fyards11 + 0.5);
-        int FroundedYard12 = (int) (Fyards12 + 0.5);
-        int FroundedYard13 = (int) (Fyards13 + 0.5);
-        int FroundedYard14 = (int) (Fyards14 + 0.5);
-        int FroundedYard15 = (int) (Fyards15 + 0.5);
-        int FroundedYard16 = (int) (Fyards16 + 0.5);
-        int FroundedYard17 = (int) (Fyards17 + 0.5);
-        int FroundedYard18 = (int) (Fyards18 + 0.5);
+//        Location.distanceBetween(frontLat[1], frontLon[1], latitude, longitude, fDistance[1]);
+//        Location.distanceBetween(frontLat[2], frontLon[2], latitude, longitude, fDistance[2]);
+//        Location.distanceBetween(frontLat[3], frontLon[3], latitude, longitude, fDistance[3]);
+//        Location.distanceBetween(frontLat[4], frontLon[4], latitude, longitude, fDistance[4]);
+//        Location.distanceBetween(frontLat[5], frontLon[5], latitude, longitude, fDistance[5]);
+//        Location.distanceBetween(frontLat[6], frontLon[6], latitude, longitude, fDistance[6]);
+//        Location.distanceBetween(frontLat[7], frontLon[7], latitude, longitude, fDistance[7]);
+//        Location.distanceBetween(frontLat[8], frontLon[8], latitude, longitude, fDistance[8]);
+//        Location.distanceBetween(frontLat[9], frontLon[9], latitude, longitude, fDistance[9]);
+//        Location.distanceBetween(frontLat[10], frontLon[10], latitude, longitude, fDistance[10]);
+//        Location.distanceBetween(frontLat[11], frontLon[11], latitude, longitude, fDistance[11]);
+//        Location.distanceBetween(frontLat[12], frontLon[12], latitude, longitude, fDistance[12]);
+//        Location.distanceBetween(frontLat[13], frontLon[13], latitude, longitude, fDistance[13]);
+//        Location.distanceBetween(frontLat[14], frontLon[14], latitude, longitude, fDistance[14]);
+//        Location.distanceBetween(frontLat[15], frontLon[15], latitude, longitude, fDistance[15]);
+//        Location.distanceBetween(frontLat[16], frontLon[16], latitude, longitude, fDistance[16]);
+//        Location.distanceBetween(frontLat[17], frontLon[17], latitude, longitude, fDistance[17]);
+//        Location.distanceBetween(frontLat[18], frontLon[18], latitude, longitude, fDistance[18]);
 
-        b1.setText(String.valueOf(BroundedYard1));
-        b2.setText(String.valueOf(BroundedYard2));
-        b3.setText(String.valueOf(BroundedYard3));
-        b4.setText(String.valueOf(BroundedYard4));
-        b5.setText(String.valueOf(BroundedYard5));
-        b6.setText(String.valueOf(BroundedYard6));
-        b7.setText(String.valueOf(BroundedYard7));
-        b8.setText(String.valueOf(BroundedYard8));
-        b9.setText(String.valueOf(BroundedYard9));
-        b10.setText(String.valueOf(BroundedYard10));
-        b11.setText(String.valueOf(BroundedYard11));
-        b12.setText(String.valueOf(BroundedYard12));
-        b13.setText(String.valueOf(BroundedYard13));
-        b14.setText(String.valueOf(BroundedYard14));
-        b15.setText(String.valueOf(BroundedYard15));
-        b16.setText(String.valueOf(BroundedYard16));
-        b17.setText(String.valueOf(BroundedYard17));
-        b18.setText(String.valueOf(BroundedYard18));
 
-        f1.setText(String.valueOf(FroundedYard1));
-        f2.setText(String.valueOf(FroundedYard2));
-        f3.setText(String.valueOf(FroundedYard3));
-        f4.setText(String.valueOf(FroundedYard4));
-        f5.setText(String.valueOf(FroundedYard5));
-        f6.setText(String.valueOf(FroundedYard6));
-        f7.setText(String.valueOf(FroundedYard7));
-        f8.setText(String.valueOf(FroundedYard8));
-        f9.setText(String.valueOf(FroundedYard9));
-        f10.setText(String.valueOf(FroundedYard10));
-        f11.setText(String.valueOf(FroundedYard11));
-        f12.setText(String.valueOf(FroundedYard12));
-        f13.setText(String.valueOf(FroundedYard13));
-        f14.setText(String.valueOf(FroundedYard14));
-        f15.setText(String.valueOf(FroundedYard15));
-        f16.setText(String.valueOf(FroundedYard16));
-        f17.setText(String.valueOf(FroundedYard17));
-        f18.setText(String.valueOf(FroundedYard18));
+
+        float Byards1 = bDistance[1][0] * 1.093f;
+        float Byards2 = bDistance[2][0] * 1.093f;
+        float Byards3 = bDistance[3][0] * 1.093f;
+        float Byards4 = bDistance[4][0] * 1.093f;
+        float Byards5 = bDistance[5][0] * 1.093f;
+        float Byards6 = bDistance[6][0] * 1.093f;
+        float Byards7 = bDistance[7][0] * 1.093f;
+        float Byards8 = bDistance[8][0] * 1.093f;
+        float Byards9 = bDistance[9][0] * 1.093f;
+        float Byards10 = bDistance[10][0] * 1.093f;
+        float Byards11 = bDistance[11][0] * 1.093f;
+        float Byards12 = bDistance[12][0] * 1.093f;
+        float Byards13 = bDistance[13][0] * 1.093f;
+        float Byards14 = bDistance[14][0] * 1.093f;
+        float Byards15 = bDistance[15][0] * 1.093f;
+        float Byards16 = bDistance[16][0] * 1.093f;
+        float Byards17 = bDistance[17][0] * 1.093f;
+        float Byards18 = bDistance[18][0] * 1.093f;
+
+
+        float Fyards1 = fDistance[1][0] * 1.093f;
+        float Fyards2 = fDistance[2][0] * 1.093f;
+        float Fyards3 = fDistance[3][0] * 1.093f;
+        float Fyards4 = fDistance[4][0] * 1.093f;
+        float Fyards5 = fDistance[5][0] * 1.093f;
+        float Fyards6 = fDistance[6][0] * 1.093f;
+        float Fyards7 = fDistance[7][0] * 1.093f;
+        float Fyards8 = fDistance[8][0] * 1.093f;
+        float Fyards9 = fDistance[9][0] * 1.093f;
+        float Fyards10 = fDistance[10][0] * 1.093f;
+        float Fyards11 = fDistance[11][0] * 1.093f;
+        float Fyards12 = fDistance[12][0] * 1.093f;
+        float Fyards13 = fDistance[13][0] * 1.093f;
+        float Fyards14 = fDistance[14][0] * 1.093f;
+        float Fyards15 = fDistance[15][0] * 1.093f;
+        float Fyards16 = fDistance[16][0] * 1.093f;
+        float Fyards17 = fDistance[17][0] * 1.093f;
+        float Fyards18 = fDistance[18][0] * 1.093f;
+
+        int[] BroundedYardArray = new int[19];
+
+        BroundedYardArray[1] = (int) (Byards1 + 0.5);
+        BroundedYardArray[2] = (int) (Byards2 + 0.5);
+        BroundedYardArray[3] = (int) (Byards3 + 0.5);
+        BroundedYardArray[4] = (int) (Byards4 + 0.5);
+        BroundedYardArray[5] = (int) (Byards5 + 0.5);
+        BroundedYardArray[6] = (int) (Byards6 + 0.5);
+        BroundedYardArray[7] = (int) (Byards7 + 0.5);
+        BroundedYardArray[8] = (int) (Byards8 + 0.5);
+        BroundedYardArray[9] = (int) (Byards9 + 0.5);
+        BroundedYardArray[10] = (int) (Byards10 + 0.5);
+        BroundedYardArray[11] = (int) (Byards11 + 0.5);
+        BroundedYardArray[12] = (int) (Byards12 + 0.5);
+        BroundedYardArray[13] = (int) (Byards13 + 0.5);
+        BroundedYardArray[14] = (int) (Byards14 + 0.5);
+        BroundedYardArray[15] = (int) (Byards15 + 0.5);
+        BroundedYardArray[16] = (int) (Byards16 + 0.5);
+        BroundedYardArray[17] = (int) (Byards17 + 0.5);
+        BroundedYardArray[18] = (int) (Byards18 + 0.5);
+
+        for(int i = 0; i<19; i++){
+            if (BroundedYardArray[i] <= 2){
+                BroundedYardArray[i] = 0;
+            }
+        }
+        for(int i = 0; i<19; i++){
+            if (BroundedYardArray[i] > 10000){
+                BroundedYardArray[i] = 0;
+            }
+        }
+
+        int[] FroundedYardArray = new int[19];
+
+        FroundedYardArray[1] = (int) (Fyards1 + 0.5);
+        FroundedYardArray[2] = (int) (Fyards2 + 0.5);
+        FroundedYardArray[3] = (int) (Fyards3 + 0.5);
+        FroundedYardArray[4] = (int) (Fyards4 + 0.5);
+        FroundedYardArray[5] = (int) (Fyards5 + 0.5);
+        FroundedYardArray[6] = (int) (Fyards6 + 0.5);
+        FroundedYardArray[7] = (int) (Fyards7 + 0.5);
+        FroundedYardArray[8] = (int) (Fyards8 + 0.5);
+        FroundedYardArray[9] = (int) (Fyards9 + 0.5);
+        FroundedYardArray[10] = (int) (Fyards10 + 0.5);
+        FroundedYardArray[11] = (int) (Fyards11 + 0.5);
+        FroundedYardArray[12] = (int) (Fyards12 + 0.5);
+        FroundedYardArray[13] = (int) (Fyards13 + 0.5);
+        FroundedYardArray[14] = (int) (Fyards14 + 0.5);
+        FroundedYardArray[15] = (int) (Fyards15 + 0.5);
+        FroundedYardArray[16] = (int) (Fyards16 + 0.5);
+        FroundedYardArray[17] = (int) (Fyards17 + 0.5);
+        FroundedYardArray[18] = (int) (Fyards18 + 0.5);
+
+        for(int i = 0; i<19; i++){
+            if (FroundedYardArray[i] <= 2){
+                FroundedYardArray[i] = 0;
+            }
+        }
+        for(int i = 0; i<19; i++){
+            if (FroundedYardArray[i] > 10000){
+                FroundedYardArray[i] = 0;
+            }
+        }
+        b1.setText(String.valueOf(BroundedYardArray[1]));
+        b2.setText(String.valueOf(BroundedYardArray[2]));
+        b3.setText(String.valueOf(BroundedYardArray[3]));
+        b4.setText(String.valueOf(BroundedYardArray[4]));
+        b5.setText(String.valueOf(BroundedYardArray[5]));
+        b6.setText(String.valueOf(BroundedYardArray[6]));
+        b7.setText(String.valueOf(BroundedYardArray[7]));
+        b8.setText(String.valueOf(BroundedYardArray[8]));
+        b9.setText(String.valueOf(BroundedYardArray[9]));
+        b10.setText(String.valueOf(BroundedYardArray[10]));
+        b11.setText(String.valueOf(BroundedYardArray[11]));
+        b12.setText(String.valueOf(BroundedYardArray[12]));
+        b13.setText(String.valueOf(BroundedYardArray[13]));
+        b14.setText(String.valueOf(BroundedYardArray[14]));
+        b15.setText(String.valueOf(BroundedYardArray[15]));
+        b16.setText(String.valueOf(BroundedYardArray[16]));
+        b17.setText(String.valueOf(BroundedYardArray[17]));
+        b18.setText(String.valueOf(BroundedYardArray[18]));
+
+        f1.setText(String.valueOf(FroundedYardArray[1]));
+        f2.setText(String.valueOf(FroundedYardArray[2]));
+        f3.setText(String.valueOf(FroundedYardArray[3]));
+        f4.setText(String.valueOf(FroundedYardArray[4]));
+        f5.setText(String.valueOf(FroundedYardArray[5]));
+        f6.setText(String.valueOf(FroundedYardArray[6]));
+        f7.setText(String.valueOf(FroundedYardArray[7]));
+        f8.setText(String.valueOf(FroundedYardArray[8]));
+        f9.setText(String.valueOf(FroundedYardArray[9]));
+        f10.setText(String.valueOf(FroundedYardArray[10]));
+        f11.setText(String.valueOf(FroundedYardArray[11]));
+        f12.setText(String.valueOf(FroundedYardArray[12]));
+        f13.setText(String.valueOf(FroundedYardArray[13]));
+        f14.setText(String.valueOf(FroundedYardArray[14]));
+        f15.setText(String.valueOf(FroundedYardArray[15]));
+        f16.setText(String.valueOf(FroundedYardArray[16]));
+        f17.setText(String.valueOf(FroundedYardArray[17]));
+        f18.setText(String.valueOf(FroundedYardArray[18]));
 
     }
 
@@ -1307,23 +1380,101 @@ public class MainActivity extends AppCompatActivity {
         nwLat[18] = 55.111530;
         nwLong[18] = -7.468690;
 
+        //north west back
+        nwBLat[1] = 55.110981;
+        nwBLong[1] = -7.471110;
+        nwBLat[2] = 55.109243;
+        nwBLong[2] = -7.473569;
+
+        nwBLat[3] = 55.108669;
+        nwBLong[3] = -7.474137;
+        nwBLat[4] = 55.105868;
+        nwBLong[4] = -7.473664;
+        nwBLat[5] = 55.102872;
+        nwBLong[5] = -7.475849;
+        nwBLat[6] = 55.105685;
+        nwBLong[6] = -7.472735;
+        nwBLat[7] = 55.108876;
+        nwBLong[7] = -7.469840;
+        nwBLat[8] = 55.108079;
+        nwBLong[8] = -7.469713;
+        nwBLat[9] = 55.112636;
+        nwBLong[9] = -7.465700;
+        nwBLat[10] = 55.114577;
+        nwBLong[10] = -7.462907;
+        nwBLat[11] = 55.112837;
+        nwBLong[11] = -7.466777;
+        nwBLat[12] = 55.108948;
+        nwBLong[12] = -7.469499;
+        nwBLat[13] = 55.110363;
+        nwBLong[13] = -7.469533;
+        nwBLat[14] = 55.108306;
+        nwBLong[14] = -7.472440;
+        nwBLat[15] = 55.106209;
+        nwBLong[15] = -7.472017;
+        nwBLat[16] = 55.105325;
+        nwBLong[16] = -7.472364;
+        nwBLat[17] = 55.109150;
+        nwBLong[17] = -7.473580;
+        nwBLat[18] = 55.111621;
+        nwBLong[18] = -7.468512;
+
+        //north west front
+        nwFLat[1] = 55.111152;
+        nwFLong[1] = -7.470723;
+        nwFLat[2] = 55.109555;
+        nwFLong[2] = -7.473536;
+
+        nwFLat[3] = 55.108854;
+        nwFLong[3] = -7.474137;
+        nwFLat[4] = 55.106104;
+        nwFLong[4] = -7.473641;
+        nwFLat[5] = 55.103087;
+        nwFLong[5] = -7.475639;
+        nwFLat[6] = 55.105424;
+        nwFLong[6] = -7.472880;
+        nwFLat[7] = 55.108610;
+        nwFLong[7] = -7.469940;
+        nwFLat[8] = 55.108324;
+        nwFLong[8] = -7.469509;
+        nwFLat[9] = 55.112427;
+        nwFLong[9] = -7.466033;
+        nwFLat[10] = 55.114337;
+        nwFLong[10] = -7.463197;
+        nwFLat[11] = 55.113058;
+        nwFLong[11] = -7.466336;
+        nwFLat[12] = 55.109188;
+        nwFLong[12] = -7.469402;
+        nwFLat[13] = 55.110123;
+        nwFLong[13] = -7.469726;
+        nwFLat[14] = 55.108603;
+        nwFLong[14] = -7.472179;
+        nwFLat[15] = 55.106469;
+        nwFLong[15] = -7.471974;
+        nwFLat[16] = 55.105647;
+        nwFLong[16] = -7.472235;
+        nwFLat[17] = 55.108964;
+        nwFLong[17] = -7.473515;
+        nwFLat[18] = 55.111423;
+        nwFLong[18] = -7.468871;
+
         //Buncrana co ordinates
         bcLat[1] = 55.124619;
         bcLong[1] = -7.457340;
         bcLat[2] = 55.123307;
         bcLong[2] = -7.456721;
-        bcLat[3] = 55.124618;
-        bcLong[3] = -7.457744;
+        bcLat[3] = 55.124591;
+        bcLong[3] = -7.457730;
         bcLat[4] = 55.122529;
         bcLong[4] = -7.457093;
-        bcLat[5] = 55.127252;
-        bcLong[5] = -7.460156;
-        bcLat[6] = 55.127258;
-        bcLong[6] = -7.459483;
-        bcLat[7] = 55.124962;
-        bcLong[7] = -7.457947;
-        bcLat[8] = 55.127454;
-        bcLong[8] = -7.458692;
+        bcLat[5] = 55.127232;
+        bcLong[5] = -7.460073;
+        bcLat[6] = 55.127249;
+        bcLong[6] = -7.459488;
+        bcLat[7] = 55.124949;
+        bcLong[7] = -7.457960;
+        bcLat[8] = 55.127433;
+        bcLong[8] = -7.458690;
         bcLat[9] = 55.127079;
         bcLong[9] = -7.457915;
         bcLat[10] = 0;
@@ -1344,6 +1495,82 @@ public class MainActivity extends AppCompatActivity {
         bcLong[17] = 0;
         bcLat[18] = 0;
         bcLong[18] = 0;
+
+        //buncrana back
+        bcBLat[1] = 55.124522;
+        bcBLong[1] = -7.457375;
+        bcBLat[2] = 55.123208;
+        bcBLong[2] = -7.456732;
+        bcBLat[3] = 55.124691;
+        bcBLong[3] = -7.457730;
+        bcBLat[4] = 55.122450;
+        bcBLong[4] = -7.457060;
+        bcBLat[5] = 55.127294;
+        bcBLong[5] = -7.460073;
+        bcBLat[6] = 55.127162;
+        bcBLong[6] = -7.459442;
+        bcBLat[7] = 55.124878;
+        bcBLong[7] = -7.457948;
+        bcBLat[8] = 55.127514;
+        bcBLong[8] = -7.458665;
+        bcBLat[9] = 55.126883;
+        bcBLong[9] = -7.457837;
+        bcBLat[10] = 0;
+        bcBLong[10] = 0;
+        bcBLat[11] = 0;
+        bcBLong[11] = 0;
+        bcBLat[12] = 0;
+        bcBLong[12] = 0;
+        bcBLat[13] = 0;
+        bcBLong[13] = 0;
+        bcBLat[14] = 0;
+        bcBLong[14] = 0;
+        bcBLat[15] = 0;
+        bcBLong[15] = 0;
+        bcBLat[16] = 0;
+        bcBLong[16] = 0;
+        bcBLat[17] = 0;
+        bcBLong[17] = 0;
+        bcBLat[18] = 0;
+        bcBLong[18] = 0;
+
+        //buncrana front
+        bcFLat[1] = 55.124722;
+        bcFLong[1] = -7.457342;
+        bcFLat[2] = 55.123397;
+        bcFLong[2] = -7.456699;
+        bcFLat[3] = 55.124491;
+        bcFLong[3] = -7.457734;
+        bcFLat[4] = 55.122612;
+        bcFLong[4] = -7.457200;
+        bcFLat[5] = 55.127172;
+        bcFLong[5] = -7.460073;
+        bcFLat[6] = 55.127331;
+        bcFLong[6] = -7.459562;
+        bcFLat[7] = 55.125043;
+        bcFLong[7] = -7.457986;
+        bcFLat[8] = 55.127348;
+        bcFLong[8] = -7.458693;
+        bcFLat[9] = 55.127268;
+        bcFLong[9] = -7.457989;
+        bcFLat[10] = 0;
+        bcFLong[10] = 0;
+        bcFLat[11] = 0;
+        bcFLong[11] = 0;
+        bcFLat[12] = 0;
+        bcFLong[12] = 0;
+        bcFLat[13] = 0;
+        bcFLong[13] = 0;
+        bcFLat[14] = 0;
+        bcFLong[14] = 0;
+        bcFLat[15] = 0;
+        bcFLong[15] = 0;
+        bcFLat[16] = 0;
+        bcFLong[16] = 0;
+        bcFLat[17] = 0;
+        bcFLong[17] = 0;
+        bcFLat[18] = 0;
+        bcFLong[18] = 0;
 
         //Ballyliffin Old Links
         bloLat[1] = 55.295708;
