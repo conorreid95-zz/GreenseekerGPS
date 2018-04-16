@@ -24,6 +24,10 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -176,7 +180,10 @@ public class MainActivity extends AppCompatActivity {
 
     int selectedClub = 0;
 
+
     String weatherLink = "http://api.openweathermap.org/data/2.5/weather?id=2654332&APPID=d2f1c7fd747498a9246f9467457b722e";
+
+    AdView adView;
 
     public static double round(double value, int places) {
         if (places < 0) throw new IllegalArgumentException();
@@ -191,6 +198,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        MobileAds.initialize(this, "ca-app-pub-7306277568792563~2937703196");
+        adView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
+        adView.loadAd(adRequest);
+
 
         dText1 = findViewById(R.id.distText1);
         dText2 = findViewById(R.id.distText2);
@@ -1321,7 +1334,7 @@ public class MainActivity extends AppCompatActivity {
                     float rotation = Float.valueOf(wDir);
                     arrow.setRotation(rotation - 270f);
                     arrow.setVisibility(View.VISIBLE);
-                    windSpeedText.setText("Wind Speed: " + wSpeed + " km/h");
+                    windSpeedText.setText(wSpeed + " km/h");
                     windSpeedText.setVisibility(View.VISIBLE);
 //                    windDirText.setText("Wind Direction: " + wDir + "°");
 //                    windDirText.setVisibility(View.VISIBLE);
