@@ -44,11 +44,12 @@ public class MainActivity extends AppCompatActivity {
 
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
 
-    TextView txtJson;
-    ProgressDialog pd;
-    ImageView logo;
-    ImageView arrow;
-    TextView num1;
+    boolean firstLocationResult = true; //set to false once the first onLocationChanged is called
+    TextView tempTxt;
+    ProgressDialog pd; //progress dialogue
+    ImageView logo; //golf club logo
+    ImageView arrow; //weather direction arrow
+    TextView num1; //hole numbers
     TextView num2;
     TextView num3;
     TextView num4;
@@ -67,14 +68,14 @@ public class MainActivity extends AppCompatActivity {
     TextView num17;
     TextView num18;
 
-    TextView turnOnText;
+    TextView turnOnText; //'Turn On GPS' text shown when gps is turned off
 
     TextView latText;
     TextView lonText;
 
-    TextView noInternet;
+    TextView noInternet; //'No Internet for Weather' when app has no internet access
 
-    TextView dText1;
+    TextView dText1; //centre yardage textViews
     TextView dText2;
     TextView dText3;
     TextView dText4;
@@ -93,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
     TextView dText17;
     TextView dText18;
 
-    TextView b1;
+    TextView b1;//back and front yardage textViews
     TextView f1;
     TextView b2;
     TextView f2;
@@ -138,11 +139,11 @@ public class MainActivity extends AppCompatActivity {
     LocationManager locationManager;
     LocationListener locationListener;
 
-    boolean gpsPossible = false;
+    boolean gpsPossible = false; //if device has gps. Checked with hasGPSDevice() method
     //    boolean gpsPermission = false;
     boolean gpsOn = false;
 
-    double[] nwLat = new double[19];
+    double[] nwLat = new double[19];//initialise golf club green coordinate arrays
     double[] nwLong = new double[19];
     double[] nwBLat = new double[19];
     double[] nwBLong = new double[19];
@@ -178,10 +179,17 @@ public class MainActivity extends AppCompatActivity {
     double[] balFLat = new double[19];
     double[] balFLon = new double[19];
 
-    int selectedClub = 0;
+    double[] narPLat = new double[19];
+    double[] narPLon = new double[19];
+    double[] narPBLat = new double[19];
+    double[] narPBLon = new double[19];
+    double[] narPFLat = new double[19];
+    double[] narPFLon = new double[19];
+
+    int selectedClub = 0; //track selected golf club from spinner
 
 
-    String weatherLink = "http://api.openweathermap.org/data/2.5/weather?id=2654332&APPID=d2f1c7fd747498a9246f9467457b722e";
+    String weatherLink = "http://api.openweathermap.org/data/2.5/weather?id=2654332&APPID=d2f1c7fd747498a9246f9467457b722e"; //link to get weather data is JSON format
 
     AdView adView;
 
@@ -192,20 +200,19 @@ public class MainActivity extends AppCompatActivity {
         value = value * factor;
         long tmp = Math.round(value);
         return (double) tmp / factor;
-    }
+    } //method to round a double to a certain place
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        MobileAds.initialize(this, "ca-app-pub-7306277568792563~2937703196");
-        adView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
-        adView.loadAd(adRequest);
+        MobileAds.initialize(this, "ca-app-pub-7306277568792563~2937703196"); //app id from admob. ad is changed from test to live ad in the xml, not here.
+        adView = findViewById(R.id.adView); //adView banner at bottom of screen
 
 
-        dText1 = findViewById(R.id.distText1);
+
+        dText1 = findViewById(R.id.distText1); //link views to pointers
         dText2 = findViewById(R.id.distText2);
         dText3 = findViewById(R.id.distText3);
         dText4 = findViewById(R.id.distText4);
@@ -294,8 +301,9 @@ public class MainActivity extends AppCompatActivity {
         northLetter = findViewById(R.id.nText);
         logo = findViewById(R.id.logoView);
         arrow = findViewById(R.id.arrowImage);
+        tempTxt = findViewById(R.id.tempText);
+        populateCoordinateArrays(); //set up gps coordinates for greens
 
-        populateCoordinateArrays();
         // Acquire a reference to the system Location Manager
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         gpsPossible = hasGPSDevice(this);
@@ -314,13 +322,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                setTextToZero();
-                selectedClub = position;
+                setTextToZero(); //sets all yardage fields to '...' and '.' to look like they are loading. They will look like this until the first locationUpdate occurs
+                selectedClub = position; //update selected club to the spinner item selected
                 System.out.println("Spinner selected at position: " + position);
 
-                if (selectedClub == 0) {
+                if (selectedClub == 0) { //north west
 
-                    logo.setImageResource(R.drawable.north_west_logo);
+                    logo.setImageResource(R.drawable.north_west_logo); //set club logo
 
                     if (gpsOn) {
                         hideBack9(false);
@@ -333,7 +341,7 @@ public class MainActivity extends AppCompatActivity {
                         turnOnText.setVisibility(View.VISIBLE);
                     }
 
-                } else if (selectedClub == 1) {
+                } else if (selectedClub == 1) { //buncrana 9-hole, therefore hide back 9 fields.
 
                     logo.setImageResource(R.drawable.buncrana_gc_logo);
 
@@ -347,7 +355,7 @@ public class MainActivity extends AppCompatActivity {
                         hideFront9(true);
                         turnOnText.setVisibility(View.VISIBLE);
                     }
-                } else if (selectedClub == 2) {
+                } else if (selectedClub == 2) { //ballyliffin (old)
 
                     logo.setImageResource(R.drawable.bl_logo);
 
@@ -362,13 +370,14 @@ public class MainActivity extends AppCompatActivity {
                         turnOnText.setVisibility(View.VISIBLE);
                     }
 
-                } else if (selectedClub == 3) {
+                } else if (selectedClub == 3) { //ballyliffin(glashedy), same logo as old links
+                    logo.setImageResource(R.drawable.bl_logo);
                     if (gpsOn) {
                         hideBack9(false);
                         hideFront9(false);
                         turnOnText.setVisibility(View.INVISIBLE);
                     }
-                } else if (selectedClub == 4) {
+                } else if (selectedClub == 4) { //portsalon
 
                     logo.setImageResource(R.drawable.ps_logo);
 
@@ -383,7 +392,7 @@ public class MainActivity extends AppCompatActivity {
                         turnOnText.setVisibility(View.VISIBLE);
                     }
 
-                } else if (selectedClub == 5) {
+                } else if (selectedClub == 5) { //ballybofey & stranorlar
 
                     logo.setImageResource(R.drawable.bal_logo);
 
@@ -398,7 +407,22 @@ public class MainActivity extends AppCompatActivity {
                         turnOnText.setVisibility(View.VISIBLE);
                     }
 
-                } else {
+                } else if (selectedClub == 6) { //narin & portnoo
+
+                    logo.setImageResource(R.drawable.narp_logo);
+
+                    if (gpsOn) {
+                        hideBack9(false);
+                        hideFront9(false);
+                        turnOnText.setVisibility(View.INVISIBLE);
+
+                    } else {
+                        hideBack9(true);
+                        hideFront9(true);
+                        turnOnText.setVisibility(View.VISIBLE);
+                    }
+
+                }else {
                     System.out.println("Error with spinner selection");
                 }
             }
@@ -410,9 +434,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        new JsonTask().execute(weatherLink);
+        new JsonTask().execute(weatherLink); //download weather data using weatherLink string with JsonTask class
 //        btnHit = (Button) findViewById(R.id.btnHit);
-        txtJson = findViewById(R.id.tempText);
+
 //
 //        btnHit.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -426,14 +450,22 @@ public class MainActivity extends AppCompatActivity {
         locationListener = new LocationListener() {
             public void onLocationChanged(Location location) {
                 // Called when a new location is found by the network location provider.
+
                 makeUseOfNewLocation(location);
+                if(firstLocationResult){ //if this is the first time the location was received
+
+                    AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).setLocation(location).build(); //build adRequest using location object
+                    adView.loadAd(adRequest); //load ad into adView (banner at bottom)
+                    firstLocationResult = false; //update boolean so adRequest isn't called again (only call once)
+                }
+
             }
 
             public void onStatusChanged(String provider, int status, Bundle extras) {
                 System.out.println("Status changed : " + status);
             }
 
-            public void onProviderEnabled(String provider) {
+            public void onProviderEnabled(String provider) { //gps turned on
                 gpsOn = true;
                 System.out.println("Provider: " + provider + "Enabled");
                 statusText.setText("GPS Active");
@@ -447,7 +479,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
 
-            public void onProviderDisabled(String provider) {
+            public void onProviderDisabled(String provider) { //gps turned off
                 gpsOn = false;
                 System.out.println("Provider: " + provider + "Disabled");
                 statusText.setText("GPS Off");
@@ -458,12 +490,12 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        setTextToZero();
+        setTextToZero(); //sets all yardage fields to '...' and '.' to look like they are loading. They will look like this until the first locationUpdate occurs
 
-        if (!gpsPossible) {
+        if (!gpsPossible) { //top right text set according to if gps is possible
             statusText.setText("No GPS Hardware Detected");
             statusText.setTextColor(Color.RED);
-        } else {
+        } else { //if gps possible, ask permission
             statusText.setText("GPS Hardware Detected");
             statusText.setTextColor(Color.parseColor("#FBC02D"));
 //            checkGPSStatus();
@@ -515,7 +547,7 @@ public class MainActivity extends AppCompatActivity {
 
             System.out.println("You already have permission");
             System.out.println("returning true, and starting requestUpdates");
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1500, 1, locationListener);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListener);
             statusText.setText("GPS Working");
             gpsOn = true;
             hideFront9(false);
@@ -545,7 +577,7 @@ public class MainActivity extends AppCompatActivity {
                         System.out.println("Permission granted after requestResult");
                         statusText.setText("Permission Granted after request!, beginning locationUpdates");
                         statusText.setTextColor(Color.GREEN);
-                        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1500, 1, locationListener);
+                        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListener);
                         statusText.setText("GPS Working");
                         gpsOn = true;
                         statusText.setText("GPS Active");
@@ -596,6 +628,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void makeUseOfNewLocation(Location location) {
 
+        //new location of device received. Compare this location to the locations of the greens of the
+        //course that is currently selected
+
         System.out.println("Received new location!");
         double latitude = location.getLatitude();
         double longitude = location.getLongitude();
@@ -622,7 +657,11 @@ public class MainActivity extends AppCompatActivity {
         } else if (selectedClub == 5) {
             setUpYardage(balLat, balLon, location);
             setUpBackFrontYardage(balBLat, balBLon, balFLat, balFLon, location);
-        }else {
+        } else if (selectedClub == 6) {
+            setUpYardage(narPLat, narPLon, location);
+            setUpBackFrontYardage(narPBLat, narPBLon, narPFLat, narPFLon, location);
+        }
+        else {
             System.out.println("Error with club selection and yardage calculation");
         }
 
@@ -734,6 +773,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setUpYardage(double[] arrayLat, double[] arrayLon, Location location) {
+        //used to set up centre yardage. Takes 2 arrays. Centre Lat & Lon. And users location.
 
 
         double latitude = location.getLatitude();
@@ -839,11 +879,7 @@ public class MainActivity extends AppCompatActivity {
         roundedYardArray[17] = (int) (yards17 + 0.5);
         roundedYardArray[18] = (int) (yards18 + 0.5);
 
-        for(int i = 0; i<19; i++){
-            if (roundedYardArray[i] <= 2){
-                roundedYardArray[i] = 0;
-            }
-        }
+
         for(int i = 0; i<19; i++){
             if (roundedYardArray[i] > 10000){
                 roundedYardArray[i] = 10000;
@@ -905,7 +941,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setUpBackFrontYardage(double[] backLat, double[] backLon, double[] frontLat, double []frontLon, Location location){
-
+    //used to set up front & back yardage. Take 4 arrays. Back LAt and Lon, and Front Lat & Lon. And users location.
         double latitude = location.getLatitude();
         double longitude = location.getLongitude();
 
@@ -1056,11 +1092,7 @@ public class MainActivity extends AppCompatActivity {
         BroundedYardArray[17] = (int) (Byards17 + 0.5);
         BroundedYardArray[18] = (int) (Byards18 + 0.5);
 
-        for(int i = 0; i<19; i++){
-            if (BroundedYardArray[i] <= 2){
-                BroundedYardArray[i] = 0;
-            }
-        }
+
         for(int i = 0; i<19; i++){
             if (BroundedYardArray[i] > 10000){
                 BroundedYardArray[i] = 0;
@@ -1088,11 +1120,7 @@ public class MainActivity extends AppCompatActivity {
         FroundedYardArray[17] = (int) (Fyards17 + 0.5);
         FroundedYardArray[18] = (int) (Fyards18 + 0.5);
 
-        for(int i = 0; i<19; i++){
-            if (FroundedYardArray[i] <= 2){
-                FroundedYardArray[i] = 0;
-            }
-        }
+
         for(int i = 0; i<19; i++){
             if (FroundedYardArray[i] > 10000){
                 FroundedYardArray[i] = 0;
@@ -1139,7 +1167,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onDestroy() {
+    protected void onDestroy() { //remove location updates to save battery
         super.onDestroy();
         locationManager.removeUpdates(locationListener);
         System.out.println("locationUpdates removed");
@@ -1147,7 +1175,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStop() {
+    protected void onStop() { //remove location updates to save battery
         super.onStop();
         locationManager.removeUpdates(locationListener);
         System.out.println("locationUpdates removed");
@@ -1155,7 +1183,7 @@ public class MainActivity extends AppCompatActivity {
 
     //
     @Override
-    protected void onRestart() {
+    protected void onRestart() { //restart previously removed location updates
         super.onRestart();
         if (!gpsPossible) {
             statusText.setText("No GPS Hardware Detected");
@@ -1170,7 +1198,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void setTextToZero() {
+    public void setTextToZero() { //make yardage fields look like they are loading
         dText1.setText("...");
         dText2.setText("...");
         dText3.setText("...");
@@ -1233,7 +1261,7 @@ public class MainActivity extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
 
-            pd = new ProgressDialog(MainActivity.this);
+            pd = new ProgressDialog(MainActivity.this); //progress dialogue
             pd.setMessage("Please wait");
             pd.setCancelable(false);
             pd.show();
@@ -1264,7 +1292,7 @@ public class MainActivity extends AppCompatActivity {
 
                 }
 
-                return buffer.toString();
+                return buffer.toString(); //returning buffer.toString(), this should contain raw json data
 
 
             } catch (MalformedURLException e) {
@@ -1283,21 +1311,21 @@ public class MainActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-            return "";
+            return ""; //return empty string on error
         }
 
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            if (pd.isShowing()) {
+            if (pd.isShowing()) { //hide progress dialogue
                 pd.dismiss();
             }
-//            txtJson.setText(result);
+//            tempTxt.setText(result);
 
-            if (isNetworkAvailable() && (result != null || !result.equals(""))) {
+            if (isNetworkAvailable() && (result != null || !result.equals(""))) { //if we have interned and the json task returned a proper string
 
 
-                try {
+                try { //tru to extract json data
                     JSONObject jObject = new JSONObject(result);
 
                     JSONObject jMain = jObject.getJSONObject("main");
@@ -1321,8 +1349,8 @@ public class MainActivity extends AppCompatActivity {
                     convertTemp = round(convertTemp, 1);
                     temp = String.valueOf(convertTemp);
                     System.out.println(temp);
-                    txtJson.setText(temp + " °C");
-                    txtJson.setVisibility(View.VISIBLE);
+                    tempTxt.setText(temp + " °C");
+                    tempTxt.setVisibility(View.VISIBLE);
 
 
                     double convertWind = 3.6;
@@ -1332,7 +1360,7 @@ public class MainActivity extends AppCompatActivity {
                     System.out.println(wSpeed);
                     System.out.println(wDir);
                     float rotation = Float.valueOf(wDir);
-                    arrow.setRotation(rotation - 270f);
+                    arrow.setRotation(rotation - 270f); //rotate arrow image according to wind direction
                     arrow.setVisibility(View.VISIBLE);
                     windSpeedText.setText(wSpeed + " km/h");
                     windSpeedText.setVisibility(View.VISIBLE);
@@ -1354,7 +1382,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private boolean isNetworkAvailable() {
+    private boolean isNetworkAvailable() { //check if app has internet access
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
@@ -1362,6 +1390,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void populateCoordinateArrays() {
+        //method to set all green gps coordinates
         //north west coordinates (done accurately, each of centre, front, and back)
         nwLat[1] = 55.111051;
         nwLong[1] = -7.470951;
@@ -1401,10 +1430,10 @@ public class MainActivity extends AppCompatActivity {
         nwLong[18] = -7.468708;
 
         //north west back
-        nwBLat[1] = 55.110975;
-        nwBLong[1] = -7.471143;
-        nwBLat[2] = 55.109230;
-        nwBLong[2] = -7.473599;
+        nwBLat[1] = 55.111005;
+        nwBLong[1] = -7.471115;
+        nwBLat[2] = 55.109236;
+        nwBLong[2] = -7.473578;
 
         nwBLat[3] = 55.108660;
         nwBLong[3] = -7.474137;
@@ -1898,6 +1927,121 @@ public class MainActivity extends AppCompatActivity {
         balFLon[17] = -7.752300;
         balFLat[18] = 54.808118;
         balFLon[18] = -7.756789;
+
+        //Narin & port golf club centre
+        narPLat[1] = 54.839156;
+        narPLon[1] = -8.439048;
+        narPLat[2] = 54.840706;
+        narPLon[2] = -8.432423;
+        narPLat[3] = 54.842055;
+        narPLon[3] = -8.431723;
+        narPLat[4] = 54.843529;
+        narPLon[4] = -8.425403;
+        narPLat[5] = 54.846368;
+        narPLon[5] = -8.424545;
+        narPLat[6] = 54.848458;
+        narPLon[6] = -8.424116;
+        narPLat[7] = 54.849687;
+        narPLon[7] = -8.423067;
+        narPLat[8] = 54.851323;
+        narPLon[8] = -8.420347;
+        narPLat[9] = 54.851110;
+        narPLon[9] = -8.424963;
+        narPLat[10] = 54.846641;
+        narPLon[10] = -8.426398;
+        narPLat[11] = 54.846090;
+        narPLon[11] = -8.427262;
+        narPLat[12] = 54.843534;
+        narPLon[12] = -8.429617;
+        narPLat[13] = 54.841699;
+        narPLon[13] = -8.434520;
+        narPLat[14] = 54.845047;
+        narPLon[14] = -8.428077;
+        narPLat[15] = 54.842749;
+        narPLon[15] = -8.434128;
+        narPLat[16] = 54.842094;
+        narPLon[16] = -8.435829;
+        narPLat[17] = 54.839739;
+        narPLon[17] = -8.438136;
+        narPLat[18] = 54.840194;
+        narPLon[18] = -8.442105;
+
+        //narin & port back
+        narPBLat[1] = 54.839178;
+        narPBLon[1] = -8.438804;
+        narPBLat[2] = 54.840675;
+        narPBLon[2] = -8.432213;
+        narPBLat[3] = 54.842083;
+        narPBLon[3] = -8.431503;
+        narPBLat[4] = 54.843552;
+        narPBLon[4] = -8.425178;
+        narPBLat[5] = 54.846483;
+        narPBLon[5] = -8.424569;
+        narPBLat[6] = 54.848544;
+        narPBLon[6] = -8.424298;
+        narPBLat[7] = 54.849796;
+        narPBLon[7] = -8.423028;
+        narPBLat[8] = 54.851411;
+        narPBLon[8] = -8.420253;
+        narPBLat[9] = 54.851107;
+        narPBLon[9] = -8.425197;
+        narPBLat[10] = 54.846516;
+        narPBLon[10] = -8.426460;
+        narPBLat[11] = 54.845951;
+        narPBLon[11] = -8.427289;
+        narPBLat[12] = 54.843520;
+        narPBLon[12] = -8.429850;
+        narPBLat[13] = 54.841635;
+        narPBLon[13] = -8.434725;
+        narPBLat[14] = 54.845096;
+        narPBLon[14] = -8.427911;
+        narPBLat[15] = 54.842703;
+        narPBLon[15] = -8.434292;
+        narPBLat[16] = 54.842014;
+        narPBLon[16] = -8.435985;
+        narPBLat[17] = 54.839658;
+        narPBLon[17] = -8.438321;
+        narPBLat[18] = 54.840193;
+        narPBLon[18] = -8.442363;
+
+        //narin & port front
+
+        narPFLat[1] = 54.839141;
+        narPFLon[1] = -8.439308;
+        narPFLat[2] = 54.840750;
+        narPFLon[2] = -8.432672;
+        narPFLat[3] = 54.842001;
+        narPFLon[3] = -8.431948;
+        narPFLat[4] = 54.843454;
+        narPFLon[4] = -8.425623;
+        narPFLat[5] = 54.846255;
+        narPFLon[5] = -8.424574;
+        narPFLat[6] = 54.848381;
+        narPFLon[6] = -8.423966;
+        narPFLat[7] = 54.849600;
+        narPFLon[7] = -8.423097;
+        narPFLat[8] = 54.851235;
+        narPFLon[8] = -8.420468;
+        narPFLat[9] = 54.851127;
+        narPFLon[9] = -8.424700;
+        narPFLat[10] = 54.846735;
+        narPFLon[10] = -8.426326;
+        narPFLat[11] = 54.846230;
+        narPFLon[11] = -8.427281;
+        narPFLat[12] = 54.843552;
+        narPFLon[12] = -8.429397;
+        narPFLat[13] = 54.841739;
+        narPFLon[13] = -8.434315;
+        narPFLat[14] = 54.844982;
+        narPFLon[14] = -8.428289;
+        narPFLat[15] = 54.842798;
+        narPFLon[15] = -8.433992;
+        narPFLat[16] = 54.842137;
+        narPFLon[16] = -8.435684;
+        narPFLat[17] = 54.839856;
+        narPFLon[17] = -8.437977;
+        narPFLat[18] = 54.840205;
+        narPFLon[18] = -8.441899;
 
     }
 

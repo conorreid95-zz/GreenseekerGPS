@@ -12,17 +12,16 @@
         android:id="@+id/imageView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="14dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:scaleType="fitXY"
-        app:layout_constraintBottom_toTopOf="@+id/weatherText"
+        app:layout_constraintBottom_toTopOf="@+id/tempText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/greenText"
-        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/bg_gradient2" />
 
     <TextView
@@ -542,31 +541,27 @@
         android:id="@+id/tempText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="106dp"
+        android:layout_marginStart="116dp"
+        android:layout_marginTop="28dp"
         android:text="7.8 .C"
         android:textColor="@android:color/black"
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/adView"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/num9" />
 
     <TextView
         android:id="@+id/speedText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="32dp"
         android:text="17 km/h"
         android:textColor="@android:color/black"
         android:textSize="10sp"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/adView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/tempText" />
+        app:layout_constraintEnd_toEndOf="@+id/arrowImage"
+        app:layout_constraintStart_toStartOf="@+id/arrowImage"
+        app:layout_constraintTop_toBottomOf="@+id/arrowImage" />
 
     <TextView
         android:id="@+id/dirText"
@@ -622,9 +617,9 @@
 
     <ImageView
         android:id="@+id/logoView"
-        android:layout_width="40dp"
-        android:layout_height="32dp"
-        android:layout_marginStart="8dp"
+        android:layout_width="42dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="6dp"
         android:layout_marginTop="8dp"
         android:contentDescription="Golf Club Logo"
         app:layout_constraintStart_toStartOf="parent"
@@ -635,14 +630,12 @@
         android:id="@+id/arrowImage"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="38dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="6dp"
         android:contentDescription="Arrow Direction For Wind"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/speedText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/tempText"
+        app:layout_constraintTop_toTopOf="@+id/tempText"
         app:srcCompat="@drawable/arrow_icon" />
 
     <TextView
@@ -652,7 +645,7 @@
         android:layout_marginBottom="2dp"
         android:text="N"
         android:textColor="@android:color/black"
-        android:textSize="10sp"
+        android:textSize="8sp"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/arrowImage"
         app:layout_constraintEnd_toEndOf="@+id/arrowImage"
@@ -683,31 +676,12 @@
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:text="No Internet To Get Weather"
         android:textColor="@android:color/holo_red_dark"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/adView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/weatherText" />
-
-    <TextView
-        android:id="@+id/weatherText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
-        android:text="Weather"
-        android:textColor="@android:color/black"
-        android:textSize="10sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/tempText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/num9" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <View
         style="@style/Divider"
@@ -735,7 +709,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/front3" />
+
     <View
+        android:id="@+id/view4"
         style="@style/Divider"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -743,14 +719,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/front4" />
+
     <View
+        android:id="@+id/view5"
         style="@style/Divider"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/back6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/front5"
-        app:layout_constraintBottom_toTopOf="@+id/back6" />
+        app:layout_constraintTop_toBottomOf="@+id/front5" />
     <View
         style="@style/Divider"
         android:layout_marginEnd="8dp"
