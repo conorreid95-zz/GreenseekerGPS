@@ -35,7 +35,7 @@
                                     <map>
                                       <entry key="backgroundAssetType" value="COLOR" />
                                       <entry key="backgroundColor" value="2fa627" />
-                                      <entry key="foregroundImage" value="C:\Users\Conor\AndroidStudioProjects\GolfGPS\app\src\main\res\drawable\gps_logo4.PNG" />
+                                      <entry key="foregroundImage" value="C:\Users\Conor\AndroidStudioProjects\GolfGPS\app\src\main\res\drawable\gps_logo4_compressed.PNG" />
                                     </map>
                                   </option>
                                 </PersistentState>

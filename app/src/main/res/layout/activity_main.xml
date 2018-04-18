@@ -24,15 +24,60 @@
         app:layout_constraintTop_toBottomOf="@+id/greenText"
         app:srcCompat="@drawable/bg_gradient2" />
 
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="14dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toTopOf="@+id/tempText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/greenText"
+        app:srcCompat="@drawable/bg_gradient3" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="14dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="8dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toTopOf="@+id/tempText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/num5"
+        app:layout_constraintTop_toBottomOf="@+id/greenText"
+        app:srcCompat="@drawable/square_shape" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="14dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="8dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toTopOf="@+id/tempText"
+        app:layout_constraintEnd_toStartOf="@+id/distText12"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/greenText"
+        app:srcCompat="@drawable/square_shape2" />
+
     <TextView
         android:id="@+id/num1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="22dp"
         android:layout_marginTop="20dp"
         android:text="1st"
         android:textColor="@android:color/black"
-        android:textSize="12sp"
+        android:textSize="13sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/greenText" />
@@ -41,11 +86,11 @@
         android:id="@+id/num2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="22dp"
         android:layout_marginTop="20dp"
         android:text="2nd"
         android:textColor="@android:color/black"
-        android:textSize="12sp"
+        android:textSize="13sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/num1" />
@@ -54,11 +99,11 @@
         android:id="@+id/num3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="22dp"
         android:layout_marginTop="20dp"
         android:text="3rd"
         android:textColor="@android:color/black"
-        android:textSize="12sp"
+        android:textSize="13sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/num2" />
@@ -67,11 +112,11 @@
         android:id="@+id/num4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="22dp"
         android:layout_marginTop="20dp"
         android:text="4th"
         android:textColor="@android:color/black"
-        android:textSize="12sp"
+        android:textSize="13sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/num3" />
@@ -80,11 +125,11 @@
         android:id="@+id/num5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="22dp"
         android:layout_marginTop="20dp"
         android:text="5th"
         android:textColor="@android:color/black"
-        android:textSize="12sp"
+        android:textSize="13sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/num4" />
@@ -93,11 +138,11 @@
         android:id="@+id/num6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="22dp"
         android:layout_marginTop="20dp"
         android:text="6th"
         android:textColor="@android:color/black"
-        android:textSize="12sp"
+        android:textSize="13sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/num5" />
@@ -106,11 +151,11 @@
         android:id="@+id/num7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="22dp"
         android:layout_marginTop="20dp"
         android:text="7th"
         android:textColor="@android:color/black"
-        android:textSize="12sp"
+        android:textSize="13sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/num6" />
@@ -119,11 +164,11 @@
         android:id="@+id/num8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="22dp"
         android:layout_marginTop="20dp"
         android:text="8th"
         android:textColor="@android:color/black"
-        android:textSize="12sp"
+        android:textSize="13sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/num7" />
@@ -132,11 +177,11 @@
         android:id="@+id/num9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="22dp"
         android:layout_marginTop="20dp"
         android:text="9th"
         android:textColor="@android:color/black"
-        android:textSize="12sp"
+        android:textSize="13sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/num8" />
@@ -148,7 +193,7 @@
         android:layout_marginStart="16dp"
         android:text="10th"
         android:textColor="@android:color/black"
-        android:textSize="12sp"
+        android:textSize="13sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/num1"
         app:layout_constraintStart_toStartOf="@+id/guideline" />
@@ -160,7 +205,7 @@
         android:layout_marginStart="16dp"
         android:text="11th"
         android:textColor="@android:color/black"
-        android:textSize="12sp"
+        android:textSize="13sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/num2"
         app:layout_constraintStart_toStartOf="@+id/guideline" />
@@ -172,7 +217,7 @@
         android:layout_marginStart="16dp"
         android:text="12th"
         android:textColor="@android:color/black"
-        android:textSize="12sp"
+        android:textSize="13sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/num3"
         app:layout_constraintStart_toStartOf="@+id/guideline" />
@@ -184,7 +229,7 @@
         android:layout_marginStart="16dp"
         android:text="13th"
         android:textColor="@android:color/black"
-        android:textSize="12sp"
+        android:textSize="13sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/num4"
         app:layout_constraintStart_toStartOf="@+id/guideline" />
@@ -196,7 +241,7 @@
         android:layout_marginStart="16dp"
         android:text="14th"
         android:textColor="@android:color/black"
-        android:textSize="12sp"
+        android:textSize="13sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/num5"
         app:layout_constraintStart_toStartOf="@+id/guideline" />
@@ -208,7 +253,7 @@
         android:layout_marginStart="16dp"
         android:text="15th"
         android:textColor="@android:color/black"
-        android:textSize="12sp"
+        android:textSize="13sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/num6"
         app:layout_constraintStart_toStartOf="@+id/guideline" />
@@ -220,7 +265,7 @@
         android:layout_marginStart="16dp"
         android:text="16th"
         android:textColor="@android:color/black"
-        android:textSize="12sp"
+        android:textSize="13sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/num7"
         app:layout_constraintStart_toStartOf="@+id/guideline" />
@@ -232,7 +277,7 @@
         android:layout_marginStart="16dp"
         android:text="17th"
         android:textColor="@android:color/black"
-        android:textSize="12sp"
+        android:textSize="13sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/num8"
         app:layout_constraintStart_toStartOf="@+id/guideline" />
@@ -244,7 +289,7 @@
         android:layout_marginStart="16dp"
         android:text="18th"
         android:textColor="@android:color/black"
-        android:textSize="12sp"
+        android:textSize="13sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/num9"
         app:layout_constraintStart_toStartOf="@+id/guideline" />
@@ -290,9 +335,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="17dp"
         android:text="258y"
-        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/num1"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
@@ -306,7 +350,6 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="12dp"
         android:text="257y"
-        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/num2"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
@@ -320,7 +363,6 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="16dp"
         android:text="257y"
-        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/num3"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
@@ -334,7 +376,6 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="16dp"
         android:text="274y"
-        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/num4"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
@@ -348,7 +389,6 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="16dp"
         android:text="274y"
-        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/num5"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
@@ -362,7 +402,6 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="16dp"
         android:text="274y"
-        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/num6"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
@@ -376,7 +415,6 @@
         android:layout_marginEnd="32dp"
         android:layout_marginStart="16dp"
         android:text="274y"
-        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/num7"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
@@ -390,7 +428,6 @@
         android:layout_marginEnd="32dp"
         android:layout_marginStart="16dp"
         android:text="274y"
-        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/num8"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
@@ -404,7 +441,6 @@
         android:layout_marginEnd="32dp"
         android:layout_marginStart="16dp"
         android:text="342y"
-        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/num9"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
@@ -418,7 +454,6 @@
         android:layout_marginEnd="24dp"
         android:layout_marginStart="16dp"
         android:text="342y"
-        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/num1"
         app:layout_constraintEnd_toEndOf="parent"
@@ -432,7 +467,6 @@
         android:layout_marginEnd="24dp"
         android:layout_marginStart="16dp"
         android:text="342y"
-        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/num2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -446,7 +480,6 @@
         android:layout_marginEnd="24dp"
         android:layout_marginStart="16dp"
         android:text="342y"
-        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/num3"
         app:layout_constraintEnd_toEndOf="parent"
@@ -460,7 +493,6 @@
         android:layout_marginEnd="24dp"
         android:layout_marginStart="16dp"
         android:text="357y"
-        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/num4"
         app:layout_constraintEnd_toEndOf="parent"
@@ -474,7 +506,6 @@
         android:layout_marginEnd="24dp"
         android:layout_marginStart="16dp"
         android:text="342y"
-        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/num5"
         app:layout_constraintEnd_toEndOf="parent"
@@ -488,7 +519,6 @@
         android:layout_marginEnd="24dp"
         android:layout_marginStart="16dp"
         android:text="342y"
-        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/num6"
         app:layout_constraintEnd_toEndOf="parent"
@@ -502,7 +532,6 @@
         android:layout_marginEnd="24dp"
         android:layout_marginStart="16dp"
         android:text="342y"
-        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/num7"
         app:layout_constraintEnd_toEndOf="parent"
@@ -516,7 +545,6 @@
         android:layout_marginEnd="24dp"
         android:layout_marginStart="16dp"
         android:text="357y"
-        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/num8"
         app:layout_constraintEnd_toEndOf="parent"
@@ -530,7 +558,6 @@
         android:layout_marginEnd="24dp"
         android:layout_marginStart="16dp"
         android:text="241y"
-        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/num9"
         app:layout_constraintEnd_toEndOf="parent"
@@ -541,13 +568,15 @@
         android:id="@+id/tempText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="116dp"
         android:layout_marginTop="28dp"
         android:text="7.8 .C"
         android:textColor="@android:color/black"
-        android:textSize="20sp"
+        android:textSize="22sp"
         android:textStyle="bold"
         android:visibility="invisible"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/num9" />
 
@@ -555,6 +584,7 @@
         android:id="@+id/speedText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
         android:text="17 km/h"
         android:textColor="@android:color/black"
         android:textSize="10sp"
@@ -628,8 +658,8 @@
 
     <ImageView
         android:id="@+id/arrowImage"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="6dp"
         android:contentDescription="Arrow Direction For Wind"
@@ -684,6 +714,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <View
+        android:id="@+id/view7"
         style="@style/Divider"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -729,14 +760,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/front5" />
+
     <View
+        android:id="@+id/view6"
         style="@style/Divider"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/back7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/front6"
-        app:layout_constraintBottom_toTopOf="@+id/back7" />
+        app:layout_constraintTop_toBottomOf="@+id/front6" />
 
     <View
         android:id="@+id/view2"
@@ -764,7 +797,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="12dp"
-        android:fontFamily="sans-serif"
+        android:fontFamily="sans-serif-condensed"
         android:text="259"
         android:textAllCaps="false"
         android:textSize="11sp"
@@ -778,7 +811,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="1dp"
-        android:fontFamily="sans-serif"
+        android:fontFamily="sans-serif-condensed"
         android:text="235"
         android:textSize="11sp"
         android:textStyle="bold"
@@ -789,51 +822,51 @@
         android:id="@+id/back2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="sans-serif-condensed"
         android:text="281"
         android:textSize="11sp"
         android:textStyle="bold"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
         app:layout_constraintStart_toEndOf="@+id/distText2"
-        app:layout_constraintTop_toBottomOf="@+id/num1"/>
+        app:layout_constraintTop_toBottomOf="@+id/num1" />
 
     <TextView
         android:id="@+id/front2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        android:fontFamily="sans-serif-condensed"
         android:text="248"
         android:textSize="11sp"
         android:textStyle="bold"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
         app:layout_constraintStart_toEndOf="@+id/distText2"
-        app:layout_constraintTop_toBottomOf="@+id/num1"/>
+        app:layout_constraintTop_toBottomOf="@+id/num1" />
 
     <TextView
         android:id="@+id/back3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="sans-serif-condensed"
         android:text="274"
         android:textSize="11sp"
         android:textStyle="bold"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
         app:layout_constraintStart_toEndOf="@+id/distText3"
-        app:layout_constraintTop_toBottomOf="@+id/num2"/>
+        app:layout_constraintTop_toBottomOf="@+id/num2" />
 
     <TextView
         android:id="@+id/front3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        android:fontFamily="sans-serif-condensed"
         android:text="237"
         android:textSize="11sp"
         android:textStyle="bold"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
         app:layout_constraintStart_toEndOf="@+id/distText3"
         app:layout_constraintTop_toBottomOf="@+id/num2" />
 
@@ -841,12 +874,12 @@
         android:id="@+id/back4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="sans-serif-condensed"
         android:text="289"
         android:textSize="11sp"
         android:textStyle="bold"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
         app:layout_constraintStart_toEndOf="@+id/distText4"
         app:layout_constraintTop_toBottomOf="@+id/num3" />
 
@@ -854,92 +887,92 @@
         android:id="@+id/front4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        android:fontFamily="sans-serif-condensed"
         android:text="265"
         android:textSize="11sp"
         android:textStyle="bold"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
         app:layout_constraintStart_toEndOf="@+id/distText4"
-        app:layout_constraintTop_toBottomOf="@+id/num3"/>
+        app:layout_constraintTop_toBottomOf="@+id/num3" />
 
     <TextView
         android:id="@+id/back5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="sans-serif-condensed"
         android:text="293"
         android:textSize="11sp"
         android:textStyle="bold"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
         app:layout_constraintStart_toEndOf="@+id/distText5"
-        app:layout_constraintTop_toBottomOf="@+id/num4"/>
+        app:layout_constraintTop_toBottomOf="@+id/num4" />
 
     <TextView
         android:id="@+id/front5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        android:fontFamily="sans-serif-condensed"
         android:text="253"
         android:textSize="11sp"
         android:textStyle="bold"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
         app:layout_constraintStart_toEndOf="@+id/distText5"
-        app:layout_constraintTop_toBottomOf="@+id/num4"/>
+        app:layout_constraintTop_toBottomOf="@+id/num4" />
 
     <TextView
         android:id="@+id/back6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="sans-serif-condensed"
         android:text="299"
         android:textSize="11sp"
         android:textStyle="bold"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
         app:layout_constraintStart_toEndOf="@+id/distText6"
-        app:layout_constraintTop_toBottomOf="@+id/num5"/>
+        app:layout_constraintTop_toBottomOf="@+id/num5" />
 
     <TextView
         android:id="@+id/front6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        android:fontFamily="sans-serif-condensed"
         android:text="243"
         android:textSize="11sp"
         android:textStyle="bold"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
         app:layout_constraintStart_toEndOf="@+id/distText6"
-        app:layout_constraintTop_toBottomOf="@+id/num5"/>
+        app:layout_constraintTop_toBottomOf="@+id/num5" />
 
     <TextView
         android:id="@+id/back7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="sans-serif-condensed"
         android:text="295"
         android:textSize="11sp"
         android:textStyle="bold"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
         app:layout_constraintStart_toEndOf="@+id/distText7"
-        app:layout_constraintTop_toBottomOf="@+id/num6"/>
+        app:layout_constraintTop_toBottomOf="@+id/num6" />
 
     <TextView
         android:id="@+id/front7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        android:fontFamily="sans-serif-condensed"
         android:text="245"
         android:textSize="11sp"
         android:textStyle="bold"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
         app:layout_constraintStart_toEndOf="@+id/distText7"
-        app:layout_constraintTop_toBottomOf="@+id/num6"/>
+        app:layout_constraintTop_toBottomOf="@+id/num6" />
 
     <TextView
         android:id="@+id/back8"
@@ -947,7 +980,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="12dp"
-        android:fontFamily="sans-serif"
+        android:fontFamily="sans-serif-condensed"
         android:text="280"
         android:textSize="11sp"
         android:textStyle="bold"
@@ -960,7 +993,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="28dp"
-        android:fontFamily="sans-serif"
+        android:fontFamily="sans-serif-condensed"
         android:text="286"
         android:textSize="11sp"
         android:textStyle="bold"
@@ -973,7 +1006,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="12dp"
-        android:fontFamily="sans-serif"
+        android:fontFamily="sans-serif-condensed"
         android:text="290"
         android:textSize="11sp"
         android:textStyle="bold"
@@ -985,12 +1018,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:fontFamily="sans-serif"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        android:fontFamily="sans-serif-condensed"
         android:text="250"
         android:textSize="11sp"
         android:textStyle="bold"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
         app:layout_constraintStart_toEndOf="@+id/distText9"
         app:layout_constraintTop_toBottomOf="@+id/num8" />
 
@@ -1000,7 +1033,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="12dp"
-        android:fontFamily="sans-serif"
+        android:fontFamily="sans-serif-condensed"
         android:text="280"
         android:textSize="11sp"
         android:textStyle="bold"
@@ -1013,7 +1046,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="1dp"
-        android:fontFamily="sans-serif"
+        android:fontFamily="sans-serif-condensed"
         android:text="250"
         android:textSize="11sp"
         android:textStyle="bold"
@@ -1024,12 +1057,12 @@
         android:id="@+id/back11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="sans-serif-condensed"
         android:text="280"
         android:textSize="11sp"
         android:textStyle="bold"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
         app:layout_constraintStart_toEndOf="@+id/distText11"
         app:layout_constraintTop_toBottomOf="@+id/num10" />
 
@@ -1037,24 +1070,25 @@
         android:id="@+id/front11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        android:fontFamily="sans-serif-condensed"
         android:text="252"
         android:textSize="11sp"
         android:textStyle="bold"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
         app:layout_constraintStart_toEndOf="@+id/distText11"
-        app:layout_constraintTop_toBottomOf="@+id/num10"/>
+        app:layout_constraintTop_toBottomOf="@+id/num10" />
 
     <TextView
         android:id="@+id/back12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="sans-serif-condensed"
         android:text="290"
         android:textSize="11sp"
         android:textStyle="bold"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
         app:layout_constraintStart_toEndOf="@+id/distText12"
         app:layout_constraintTop_toBottomOf="@+id/num11" />
 
@@ -1062,11 +1096,12 @@
         android:id="@+id/front12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        android:fontFamily="sans-serif-condensed"
         android:text="250"
         android:textSize="11sp"
         android:textStyle="bold"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
         app:layout_constraintStart_toEndOf="@+id/distText12"
         app:layout_constraintTop_toBottomOf="@+id/num11" />
 
@@ -1074,11 +1109,12 @@
         android:id="@+id/back13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="sans-serif-condensed"
         android:text="290"
         android:textSize="11sp"
         android:textStyle="bold"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
         app:layout_constraintStart_toEndOf="@+id/distText13"
         app:layout_constraintTop_toBottomOf="@+id/num12" />
 
@@ -1086,83 +1122,90 @@
         android:id="@+id/front13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        android:fontFamily="sans-serif-condensed"
         android:text="230"
         android:textSize="11sp"
         android:textStyle="bold"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
         app:layout_constraintStart_toEndOf="@+id/distText13"
-        app:layout_constraintTop_toBottomOf="@+id/num12"/>
+        app:layout_constraintTop_toBottomOf="@+id/num12" />
 
     <TextView
         android:id="@+id/back14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="sans-serif-condensed"
         android:text="390"
         android:textSize="11sp"
         android:textStyle="bold"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
         app:layout_constraintStart_toEndOf="@+id/distText14"
-        app:layout_constraintTop_toBottomOf="@+id/num13"/>
+        app:layout_constraintTop_toBottomOf="@+id/num13" />
 
     <TextView
         android:id="@+id/front14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        android:fontFamily="sans-serif-condensed"
         android:text="320"
         android:textSize="11sp"
         android:textStyle="bold"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
         app:layout_constraintStart_toEndOf="@+id/distText14"
-        app:layout_constraintTop_toBottomOf="@+id/num13"/>
+        app:layout_constraintTop_toBottomOf="@+id/num13" />
 
     <TextView
         android:id="@+id/back15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="sans-serif-condensed"
         android:text="240"
         android:textSize="11sp"
         android:textStyle="bold"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
         app:layout_constraintStart_toEndOf="@+id/distText15"
-        app:layout_constraintTop_toBottomOf="@+id/num14"/>
+        app:layout_constraintTop_toBottomOf="@+id/num14" />
 
     <TextView
         android:id="@+id/front15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        android:fontFamily="sans-serif-condensed"
         android:text="230"
         android:textSize="11sp"
         android:textStyle="bold"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
         app:layout_constraintStart_toEndOf="@+id/distText15"
-        app:layout_constraintTop_toBottomOf="@+id/num14"/>
+        app:layout_constraintTop_toBottomOf="@+id/num14" />
 
     <TextView
         android:id="@+id/back16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="sans-serif-condensed"
         android:text="280"
         android:textSize="11sp"
         android:textStyle="bold"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
         app:layout_constraintStart_toEndOf="@+id/distText16"
-        app:layout_constraintTop_toBottomOf="@+id/num15"/>
+        app:layout_constraintTop_toBottomOf="@+id/num15" />
 
     <TextView
         android:id="@+id/front16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        android:fontFamily="sans-serif-condensed"
         android:text="230"
         android:textSize="11sp"
         android:textStyle="bold"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
         app:layout_constraintStart_toEndOf="@+id/distText16"
         app:layout_constraintTop_toBottomOf="@+id/num15" />
 
@@ -1170,11 +1213,12 @@
         android:id="@+id/back17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="sans-serif-condensed"
         android:text="277"
         android:textSize="11sp"
         android:textStyle="bold"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
         app:layout_constraintStart_toEndOf="@+id/distText17"
         app:layout_constraintTop_toBottomOf="@+id/num16" />
 
@@ -1182,23 +1226,25 @@
         android:id="@+id/front17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        android:fontFamily="sans-serif-condensed"
         android:text="238"
         android:textSize="11sp"
         android:textStyle="bold"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
         app:layout_constraintStart_toEndOf="@+id/distText17"
-        app:layout_constraintTop_toBottomOf="@+id/num16"/>
+        app:layout_constraintTop_toBottomOf="@+id/num16" />
 
     <TextView
         android:id="@+id/back18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="sans-serif-condensed"
         android:text="290"
         android:textSize="11sp"
         android:textStyle="bold"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
         app:layout_constraintStart_toEndOf="@+id/distText18"
         app:layout_constraintTop_toBottomOf="@+id/num17" />
 
@@ -1206,11 +1252,12 @@
         android:id="@+id/front18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        android:fontFamily="sans-serif-condensed"
         android:text="230"
         android:textSize="11sp"
         android:textStyle="bold"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
         app:layout_constraintStart_toEndOf="@+id/distText18"
         app:layout_constraintTop_toBottomOf="@+id/num17" />
 
