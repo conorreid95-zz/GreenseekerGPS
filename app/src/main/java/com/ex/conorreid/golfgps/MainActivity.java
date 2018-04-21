@@ -203,10 +203,22 @@ public class MainActivity extends AppCompatActivity {
     double[] donFLat = new double[19];
     double[] donFLon = new double[19];
 
+    double[] letLat = new double[19];
+    double[] letLon = new double[19];
+    double[] letBLat = new double[19];
+    double[] letBLon = new double[19];
+    double[] letFLat = new double[19];
+    double[] letFLon = new double[19];
+
+
+
+
+
     int selectedClub = 0; //track selected golf club from spinner
 
     SharedPreferences sp;
     SharedPreferences.Editor editor;
+
     String weatherLink = "http://api.openweathermap.org/data/2.5/weather?id=2654332&APPID=d2f1c7fd747498a9246f9467457b722e"; //link to get weather data is JSON format
 
     AdView adView;
@@ -262,7 +274,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        MobileAds.initialize(this, "ca-app-pub-7306277568792563~2937703196"); //app id from admob. ad is changed from test to live ad in the xml, not here.
+        MobileAds.initialize(this, "ca-app-pub-7306277568792563~7353995311"); //app id from admob. ad is changed from test to live ad in the xml, not here.
         adView = findViewById(R.id.adView); //adView banner at bottom of screen
 
         sp = getSharedPreferences("your_prefs", Activity.MODE_PRIVATE);
@@ -482,6 +494,7 @@ public class MainActivity extends AppCompatActivity {
                 } else if (selectedClub == 7) { //Donegal (murvagh)
 
                     logo.setImageResource(R.drawable.murvagh_logo);
+                    weatherLink = "http://api.openweathermap.org/data/2.5/weather?id=2964751&APPID=d2f1c7fd747498a9246f9467457b722e";
 
                     if (gpsOn) {
                         hideBack9(false);
@@ -494,7 +507,23 @@ public class MainActivity extends AppCompatActivity {
                         turnOnText.setVisibility(View.VISIBLE);
                     }
 
-                } else {
+                }else if (selectedClub == 8) { //Letterkenny
+
+                    logo.setImageResource(R.drawable.letterkenny_logo);
+
+                    if (gpsOn) {
+                        hideBack9(false);
+                        hideFront9(false);
+                        turnOnText.setVisibility(View.INVISIBLE);
+
+                    } else {
+                        hideBack9(true);
+                        hideFront9(true);
+                        turnOnText.setVisibility(View.VISIBLE);
+                    }
+
+                }
+                else {
                     System.out.println("Error with spinner selection");
                 }
 
@@ -509,8 +538,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        new JsonTask().execute(weatherLink); //download weather data using weatherLink string with JsonTask class
-
 // Define a listener that responds to location updates
         locationListener = new LocationListener() {
             public void onLocationChanged(Location location) {
@@ -520,6 +547,7 @@ public class MainActivity extends AppCompatActivity {
                 if (firstLocationResult) { //if this is the first time the location was received
 
                     AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).setLocation(location).build(); //build adRequest using location object
+//                    AdRequest adRequest = new AdRequest.Builder().setLocation(location).build();
                     adView.loadAd(adRequest); //load ad into adView (banner at bottom)
                     firstLocationResult = false; //update boolean so adRequest isn't called again (only call once)
                 }
@@ -578,7 +606,21 @@ public class MainActivity extends AppCompatActivity {
 
         spinner.setSelection(defaultCourse);
 
+        //change link based on previously saved default course, only called once
+        if(defaultCourse == 0 ){
+           weatherLink = "http://api.openweathermap.org/data/2.5/weather?id=2654332&APPID=d2f1c7fd747498a9246f9467457b722e";
+        }
+        else if(defaultCourse == 4){
+            weatherLink = "http://api.openweathermap.org/data/2.5/weather?lat=55.20&lon=-7.62&APPID=d2f1c7fd747498a9246f9467457b722e";
+        }
+        else if(defaultCourse == 6){
+            weatherLink = "http://api.openweathermap.org/data/2.5/weather?lat=54.83&lon=-8.43&APPID=d2f1c7fd747498a9246f9467457b722e";
+        }
+        else if(defaultCourse == 7){
+            weatherLink = "http://api.openweathermap.org/data/2.5/weather?lat=54.61&lon=-8.15&APPID=d2f1c7fd747498a9246f9467457b722e";
+        }
 
+        new JsonTask().execute(weatherLink); //download weather data using weatherLink string with JsonTask class
     }
 
     public boolean checkLocationPermission() {
@@ -622,7 +664,7 @@ public class MainActivity extends AppCompatActivity {
 
             System.out.println("You already have permission");
             System.out.println("returning true, and starting requestUpdates");
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListener);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1500, 1, locationListener);
             statusText.setText("GPS Working");
             gpsOn = true;
             hideFront9(false);
@@ -652,7 +694,7 @@ public class MainActivity extends AppCompatActivity {
                         System.out.println("Permission granted after requestResult");
                         statusText.setText("Permission Granted after request!, beginning locationUpdates");
                         statusText.setTextColor(Color.GREEN);
-                        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListener);
+                        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1500, 1, locationListener);
                         statusText.setText("GPS Working");
                         gpsOn = true;
                         statusText.setText("GPS Active");
@@ -738,6 +780,9 @@ public class MainActivity extends AppCompatActivity {
         } else if (selectedClub == 7) {
             setUpYardage(donLat, donLon, location);
             setUpBackFrontYardage(donBLat, donBLon, donFLat, donFLon, location);
+        } else if (selectedClub == 8) {
+            setUpYardage(letLat, letLon, location);
+            setUpBackFrontYardage(letBLat, letBLon, letFLat, letFLon, location);
         } else {
             System.out.println("Error with club selection and yardage calculation");
         }
@@ -758,8 +803,11 @@ public class MainActivity extends AppCompatActivity {
         float choice;
         if (bool) {
             choice = 0.0f;
+            rightGrey.setVisibility(View.INVISIBLE);
         } else {
             choice = 1.0f;
+
+            rightGrey.setVisibility(View.VISIBLE);
         }
         dText10.setAlpha(choice);
         dText11.setAlpha(choice);
@@ -799,6 +847,7 @@ public class MainActivity extends AppCompatActivity {
         num16.setAlpha(choice);
         num17.setAlpha(choice);
         num18.setAlpha(choice);
+
     }
 
     public void hideFront9(boolean bool) {
@@ -806,8 +855,12 @@ public class MainActivity extends AppCompatActivity {
         float choice;
         if (bool) {
             choice = 0.0f;
+
+            leftGrey.setVisibility(View.INVISIBLE);
         } else {
             choice = 1.0f;
+
+            leftGrey.setVisibility(View.VISIBLE);
         }
         dText1.setAlpha(choice);
         dText2.setAlpha(choice);
@@ -981,6 +1034,10 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+//        for (int i = 1; i < 19; i++) { //for testing
+//                roundedYardArrayString[i] = String.valueOf(roundedYardArray[i]);
+//        }
+
         dText1.setText(roundedYardArrayString[1] + distanceLetter);
         dText2.setText(roundedYardArrayString[2] + distanceLetter);
         dText3.setText(roundedYardArrayString[3] + distanceLetter);
@@ -1052,6 +1109,10 @@ public class MainActivity extends AppCompatActivity {
                 bStringsArray[i] = String.valueOf(bRoundedArray[i]);
             }
         }
+//        for (int i = 1; i < 19; i++) { //for testing
+//                bStringsArray[i] = String.valueOf(bRoundedArray[i]);
+//        }
+
 
         b1.setText(bStringsArray[1]);
         b2.setText(bStringsArray[2]);
@@ -1088,6 +1149,11 @@ public class MainActivity extends AppCompatActivity {
                 fStringArray[i] = String.valueOf(fRoundedArray[i]);
             }
         }
+
+//        for (int i = 1; i < 19; i++) { //for testing
+//                fStringArray[i] = String.valueOf(fRoundedArray[i]);
+//        }
+
         f1.setText(fStringArray[1]);
         f2.setText(fStringArray[2]);
         f3.setText(fStringArray[3]);
@@ -1337,140 +1403,138 @@ public class MainActivity extends AppCompatActivity {
         //method to set all green gps coordinates
         //north west coordinates (done accurately, each of centre, front, and back)
 
-        nwLat[1] = 55.111010;
-        nwLong[1] = -7.471013;
-        nwLat[2] = 55.109380;
-        nwLong[2] = -7.473575;
-        nwLat[3] = 55.108692;
+        nwLat[1] = 55.111015;
+        nwLong[1] = -7.471009;
+        nwLat[2] = 55.109358;
+        nwLong[2] = -7.473637;
+        nwLat[3] = 55.108698;
         nwLong[3] = -7.474221;
-        nwLat[4] = 55.105960;
-        nwLong[4] = -7.473651;
-        nwLat[5] = 55.102958;
-        nwLong[5] = -7.475744;
-        nwLat[6] = 55.105544;
-        nwLong[6] = -7.472815;
-        nwLat[7] = 55.108733;
-        nwLong[7] = -7.469882;
-        nwLat[8] = 55.108174;
-        nwLong[8] = -7.469602;
-        nwLat[9] = 55.112493;
-        nwLong[9] = -7.465870;
-        nwLat[10] = 55.114432;
-        nwLong[10] = -7.463045;
-        nwLat[11] = 55.112941;
-        nwLong[11] = -7.466530;
-        nwLat[12] = 55.109029;
-        nwLong[12] = -7.469428;
-        nwLat[13] = 55.110212;
-        nwLong[13] = -7.469640;
-        nwLat[14] = 55.108407;
-        nwLong[14] = -7.472316;
-        nwLat[15] = 55.106320;
-        nwLong[15] = -7.471977;
-        nwLat[16] = 55.105450;
-        nwLong[16] = -7.472292;
-        nwLat[17] = 55.109042;
-        nwLong[17] = -7.473564;
-        nwLat[18] = 55.111500;
-        nwLong[18] = -7.468708;
+        nwLat[4] = 55.105963;
+        nwLong[4] = -7.473642;
+        nwLat[5] = 55.102943;
+        nwLong[5] = -7.475699;
+        nwLat[6] = 55.105514;
+        nwLong[6] = -7.472897;
+        nwLat[7] = 55.108705;
+        nwLong[7] = -7.469917;
+        nwLat[8] = 55.108116;
+        nwLong[8] = -7.469673;
+        nwLat[9] = 55.112465;
+        nwLong[9] = -7.465933;
+        nwLat[10] = 55.114393;
+        nwLong[10] = -7.463127;
+        nwLat[11] = 55.112861;
+        nwLong[11] = -7.46660;
+        nwLat[12] = 55.109008;
+        nwLong[12] = -7.469507;
+        nwLat[13] = 55.110180;
+        nwLong[13] = -7.469705;
+        nwLat[14] = 55.108449;
+        nwLong[14] = -7.472329;
+        nwLat[15] = 55.106288;
+        nwLong[15] = -7.472039;
+        nwLat[16] = 55.105430;
+        nwLong[16] = -7.472345;
+        nwLat[17] = 55.109005;
+        nwLong[17] = -7.473647;
+        nwLat[18] = 55.111462;
+        nwLong[18] = -7.468776;
 
         //north west back
-        nwBLat[1] = 55.110912;
-        nwBLong[1] = -7.471190;
-        nwBLat[2] = 55.109236;
-        nwBLong[2] = -7.473578;
-
-        nwBLat[3] = 55.108593;
-        nwBLong[3] = -7.474201;
-        nwBLat[4] = 55.105829;
-        nwBLong[4] = -7.473664;
-        nwBLat[5] = 55.102846;
-        nwBLong[5] = -7.475853;
-        nwBLat[6] = 55.105672;
-        nwBLong[6] = -7.472735;
-        nwBLat[7] = 55.108865;
-        nwBLong[7] = -7.469840;
-        nwBLat[8] = 55.108049;
+        nwBLat[1] = 55.110932;
+        nwBLong[1] = -7.471214;
+        nwBLat[2] = 55.109226;
+        nwBLong[2] = -7.473694;
+        nwBLat[3] = 55.108595;
+        nwBLong[3] = -7.474213;
+        nwBLat[4] = 55.105822;
+        nwBLong[4] = -7.473649;
+        nwBLat[5] = 55.102835;
+        nwBLong[5] = -7.475773;
+        nwBLat[6] = 55.105655;
+        nwBLong[6] = -7.472803;
+        nwBLat[7] = 55.108856;
+        nwBLong[7] = -7.469936;
+        nwBLat[8] = 55.108038;
         nwBLong[8] = -7.469685;
-        nwBLat[9] = 55.112616;
-        nwBLong[9] = -7.465720;
-        nwBLat[10] = 55.114537;
-        nwBLong[10] = -7.462917;
-        nwBLat[11] = 55.112827;
-        nwBLong[11] = -7.466777;
-        nwBLat[12] = 55.108919;
-        nwBLong[12] = -7.469460;
-        nwBLat[13] = 55.110325;
-        nwBLong[13] = -7.469554;
-        nwBLat[14] = 55.108272;
-        nwBLong[14] = -7.472420;
-        nwBLat[15] = 55.106195;
-        nwBLong[15] = -7.472002;
-        nwBLat[16] = 55.105304;
-        nwBLong[16] = -7.472364;
-        nwBLat[17] = 55.109117;
-        nwBLong[17] = -7.473580;
-        nwBLat[18] = 55.111601;
-        nwBLong[18] = -7.468512;
+        nwBLat[9] = 55.112567;
+        nwBLong[9] = -7.465788;
+        nwBLat[10] = 55.114485;
+        nwBLong[10] = -7.463024;
+        nwBLat[11] = 55.112766;
+        nwBLong[11] = -7.466826;
+        nwBLat[12] = 55.108903;
+        nwBLong[12] = -7.469530;
+        nwBLat[13] = 55.110279;
+        nwBLong[13] = -7.469618;
+        nwBLat[14] = 55.108355;
+        nwBLong[14] = -7.472380;
+        nwBLat[15] = 55.106176;
+        nwBLong[15] = -7.472062;
+        nwBLat[16] = 55.105323;
+        nwBLong[16] = -7.472396;
+        nwBLat[17] = 55.109097;
+        nwBLong[17] = -7.473654;
+        nwBLat[18] = 55.111532;
+        nwBLong[18] = -7.468595;
 
         //north west front
-        nwFLat[1] = 55.111104;
-        nwFLong[1] = -7.470860;
-        nwFLat[2] = 55.109508;
-        nwFLong[2] = -7.473531;
-
-        nwFLat[3] = 55.108787;
-        nwFLong[3] = -7.474249;
-        nwFLat[4] = 55.106074;
-        nwFLong[4] = -7.473641;
-        nwFLat[5] = 55.103089;
-        nwFLong[5] = -7.475633;
-        nwFLat[6] = 55.105388;
-        nwFLong[6] = -7.472893;
-        nwFLat[7] = 55.108594;
-        nwFLong[7] = -7.469970;
-        nwFLat[8] = 55.108262;
-        nwFLong[8] = -7.469532;
-        nwFLat[9] = 55.112399;
-        nwFLong[9] = -7.466003;
-        nwFLat[10] = 55.114323;
-        nwFLong[10] = -7.463197;
-        nwFLat[11] = 55.113048;
-        nwFLong[11] = -7.466322;
-        nwFLat[12] = 55.109173;
-        nwFLong[12] = -7.469402;
-        nwFLat[13] = 55.110091;
-        nwFLong[13] = -7.469754;
-        nwFLat[14] = 55.108590;
-        nwFLong[14] = -7.472179;
-        nwFLat[15] = 55.106469;
-        nwFLong[15] = -7.471974;
-        nwFLat[16] = 55.105600;
-        nwFLong[16] = -7.472265;
-        nwFLat[17] = 55.108934;
-        nwFLong[17] = -7.473556;
-        nwFLat[18] = 55.111378;
-        nwFLong[18] = -7.468884;
+        nwFLat[1] = 55.111086;
+        nwFLong[1] = -7.470844;
+        nwFLat[2] = 55.109471;
+        nwFLong[2] = -7.473578;
+        nwFLat[3] = 55.108790;
+        nwFLong[3] = -7.474237;
+        nwFLat[4] = 55.106083;
+        nwFLong[4] = -7.473642;
+        nwFLat[5] = 55.103077;
+        nwFLong[5] = -7.475595;
+        nwFLat[6] = 55.105379;
+        nwFLong[6] = -7.472959;
+        nwFLat[7] = 55.108553;
+        nwFLong[7] = -7.469992;
+        nwFLat[8] = 55.108220;
+        nwFLong[8] = -7.469609;
+        nwFLat[9] = 55.112369;
+        nwFLong[9] = -7.466082;
+        nwFLat[10] = 55.114294;
+        nwFLong[10] = -7.463272;
+        nwFLat[11] = 55.112983;
+        nwFLong[11] = -7.466385;
+        nwFLat[12] = 55.109105;
+        nwFLong[12] = -7.469504;
+        nwFLat[13] = 55.110062;
+        nwFLong[13] = -7.469829;
+        nwFLat[14] = 55.108570;
+        nwFLong[14] = -7.472248;
+        nwFLat[15] = 55.106415;
+        nwFLong[15] = -7.472016;
+        nwFLat[16] = 55.105538;
+        nwFLong[16] = -7.472299;
+        nwFLat[17] = 55.108898;
+        nwFLong[17] = -7.473627;
+        nwFLat[18] = 55.111374;
+        nwFLong[18] = -7.468942;
 
         //Buncrana co ordinates (done accurately, each of centre, front, and back)
-        bcLat[1] = 55.124619;
-        bcLong[1] = -7.457340;
-        bcLat[2] = 55.123307;
-        bcLong[2] = -7.456721;
+        bcLat[1] = 55.124638;
+        bcLong[1] = -7.457352;
+        bcLat[2] = 55.123258;
+        bcLong[2] = -7.456777;
         bcLat[3] = 55.124591;
-        bcLong[3] = -7.457730;
-        bcLat[4] = 55.122529;
-        bcLong[4] = -7.457093;
-        bcLat[5] = 55.127232;
-        bcLong[5] = -7.460073;
-        bcLat[6] = 55.127249;
-        bcLong[6] = -7.459488;
-        bcLat[7] = 55.124949;
-        bcLong[7] = -7.457960;
-        bcLat[8] = 55.127433;
-        bcLong[8] = -7.458690;
-        bcLat[9] = 55.127079;
-        bcLong[9] = -7.457915;
+        bcLong[3] = -7.457743;
+        bcLat[4] = 55.122516;
+        bcLong[4] = -7.457251;
+        bcLat[5] = 55.127245;
+        bcLong[5] = -7.460087;
+        bcLat[6] = 55.127269;
+        bcLong[6] = -7.459454;
+        bcLat[7] = 55.124978;
+        bcLong[7] = -7.457967;
+        bcLat[8] = 55.127444;
+        bcLong[8] = -7.458677;
+        bcLat[9] = 55.127125;
+        bcLong[9] = -7.457920;
         bcLat[10] = 0;
         bcLong[10] = 0;
         bcLat[11] = 0;
@@ -1491,24 +1555,24 @@ public class MainActivity extends AppCompatActivity {
         bcLong[18] = 0;
 
         //buncrana back
-        bcBLat[1] = 55.124522;
-        bcBLong[1] = -7.457375;
-        bcBLat[2] = 55.123208;
-        bcBLong[2] = -7.456732;
-        bcBLat[3] = 55.124691;
-        bcBLong[3] = -7.457730;
-        bcBLat[4] = 55.122450;
-        bcBLong[4] = -7.457060;
-        bcBLat[5] = 55.127294;
-        bcBLong[5] = -7.460073;
-        bcBLat[6] = 55.127162;
-        bcBLong[6] = -7.459442;
-        bcBLat[7] = 55.124878;
-        bcBLong[7] = -7.457948;
-        bcBLat[8] = 55.127514;
-        bcBLong[8] = -7.458665;
-        bcBLat[9] = 55.126883;
-        bcBLong[9] = -7.457837;
+        bcBLat[1] = 55.124523;
+        bcBLong[1] = -7.457399;
+        bcBLat[2] = 55.123174;
+        bcBLong[2] = -7.456792;
+        bcBLat[3] = 55.124692;
+        bcBLong[3] = -7.457731;
+        bcBLat[4] = 55.122425;
+        bcBLong[4] = -7.457196;
+        bcBLat[5] = 55.127313;
+        bcBLong[5] = -7.460071;
+        bcBLat[6] = 55.127181;
+        bcBLong[6] = -7.459420;
+        bcBLat[7] = 55.124891;
+        bcBLong[7] = -7.457944;
+        bcBLat[8] = 55.127520;
+        bcBLong[8] = -7.458656;
+        bcBLat[9] = 55.127002;
+        bcBLong[9] = -7.457888;
         bcBLat[10] = 0;
         bcBLong[10] = 0;
         bcBLat[11] = 0;
@@ -1529,24 +1593,24 @@ public class MainActivity extends AppCompatActivity {
         bcBLong[18] = 0;
 
         //buncrana front
-        bcFLat[1] = 55.124722;
-        bcFLong[1] = -7.457342;
-        bcFLat[2] = 55.123397;
-        bcFLong[2] = -7.456699;
-        bcFLat[3] = 55.124491;
-        bcFLong[3] = -7.457734;
-        bcFLat[4] = 55.122612;
-        bcFLong[4] = -7.457200;
-        bcFLat[5] = 55.127172;
-        bcFLong[5] = -7.460073;
-        bcFLat[6] = 55.127331;
-        bcFLong[6] = -7.459562;
-        bcFLat[7] = 55.125043;
-        bcFLong[7] = -7.457986;
-        bcFLat[8] = 55.127348;
-        bcFLong[8] = -7.458693;
-        bcFLat[9] = 55.127268;
-        bcFLong[9] = -7.457989;
+        bcFLat[1] = 55.124734;
+        bcFLong[1] = -7.457344;
+        bcFLat[2] = 55.123342;
+        bcFLong[2] = -7.456744;
+        bcFLat[3] = 55.124468;
+        bcFLong[3] = -7.457759;
+        bcFLat[4] = 55.122621;
+        bcFLong[4] = -7.457320;
+        bcFLat[5] = 55.127175;
+        bcFLong[5] = -7.460104;
+        bcFLat[6] = 55.127336;
+        bcFLong[6] = -7.459504;
+        bcFLat[7] = 55.125047;
+        bcFLong[7] = -7.457995;
+        bcFLat[8] = 55.127369;
+        bcFLong[8] = -7.458703;
+        bcFLat[9] = 55.127256;
+        bcFLong[9] = -7.457972;
         bcFLat[10] = 0;
         bcFLong[10] = 0;
         bcFLat[11] = 0;
@@ -1989,119 +2053,234 @@ public class MainActivity extends AppCompatActivity {
         narPFLon[18] = -8.441899;
 
         //donagal murvagh golf club centre
-        narPLat[1] = 54.617290;
-        narPLon[1] = -8.157472;
-        narPLat[2] = 54.617821;
-        narPLon[2] = -8.163099;
-        narPLat[3] = 54.619678;
-        narPLon[3] = -8.161690;
-        narPLat[4] = 54.623699;
-        narPLon[4] = -8.159473;
-        narPLat[5] = 54.625175;
-        narPLon[5] = -8.158196;
-        narPLat[6] = 54.622609;
-        narPLon[6] = -8.164786;
-        narPLat[7] = 54.618322;
-        narPLon[7] = -8.165276;
-        narPLat[8] = 54.613423;
-        narPLon[8] = -8.164903;
-        narPLat[9] = 54.612012;
-        narPLon[9] = -8.160031;
-        narPLat[10] = 54.613948;
-        narPLon[10] = -8.164245;
-        narPLat[11] = 54.617475;
-        narPLon[11] = -8.164890;
-        narPLat[12] = 54.622390;
-        narPLon[12] = -8.162536;
-        narPLat[13] = 54.622975;
-        narPLon[13] = -8.161131;
-        narPLat[14] = 54.618086;
-        narPLon[14] = -8.163695;
-        narPLat[15] = 54.614474;
-        narPLon[15] = -8.161514;
-        narPLat[16] = 54.617060;
-        narPLon[16] = -8.163085;
-        narPLat[17] = 54.616960;
-        narPLon[17] = -8.159439;
-        narPLat[18] = 54.613331;
-        narPLon[18] = -8.160408;
+        donLat[1] = 54.617290;
+        donLon[1] = -8.157472;
+        donLat[2] = 54.617821;
+        donLon[2] = -8.163099;
+        donLat[3] = 54.619678;
+        donLon[3] = -8.161690;
+        donLat[4] = 54.623699;
+        donLon[4] = -8.159473;
+        donLat[5] = 54.625175;
+        donLon[5] = -8.158196;
+        donLat[6] = 54.622609;
+        donLon[6] = -8.164786;
+        donLat[7] = 54.618322;
+        donLon[7] = -8.165276;
+        donLat[8] = 54.613423;
+        donLon[8] = -8.164903;
+        donLat[9] = 54.612012;
+        donLon[9] = -8.160031;
+        donLat[10] = 54.613948;
+        donLon[10] = -8.164245;
+        donLat[11] = 54.617475;
+        donLon[11] = -8.164890;
+        donLat[12] = 54.622390;
+        donLon[12] = -8.162536;
+        donLat[13] = 54.622975;
+        donLon[13] = -8.161131;
+        donLat[14] = 54.618086;
+        donLon[14] = -8.163695;
+        donLat[15] = 54.614474;
+        donLon[15] = -8.161514;
+        donLat[16] = 54.617060;
+        donLon[16] = -8.163085;
+        donLat[17] = 54.616960;
+        donLon[17] = -8.159439;
+        donLat[18] = 54.613331;
+        donLon[18] = -8.160408;
 
         //donegal murvagh back
-        narPBLat[1] = 54.617375;
-        narPBLon[1] = -8.157440;
-        narPBLat[2] = 54.617797;
-        narPBLon[2] = -8.163386;
-        narPBLat[3] = 54.619786;
-        narPBLon[3] = -8.161656;
-        narPBLat[4] = 54.623807;
-        narPBLon[4] = -8.159336;
-        narPBLat[5] = 54.625238;
-        narPBLon[5] = -8.157980;
-        narPBLat[6] = 54.622532;
-        narPBLon[6] = -8.164867;
-        narPBLat[7] = 54.618216;
-        narPBLon[7] = -8.165272;
-        narPBLat[8] = 54.613262;
-        narPBLon[8] = -8.164880;
-        narPBLat[9] = 54.611881;
-        narPBLon[9] = -8.159922;
-        narPBLat[10] = 54.613911;
-        narPBLon[10] = -8.164487;
-        narPBLat[11] = 54.617543;
-        narPBLon[11] = -8.164891;
-        narPBLat[12] = 54.622493;
-        narPBLon[12] = -8.162511;
-        narPBLat[13] = 54.622966;
-        narPBLon[13] = -8.160907;
-        narPBLat[14] = 54.617981;
-        narPBLon[14] = -8.163774;
-        narPBLat[15] = 54.614332;
-        narPBLon[15] = -8.161467;
-        narPBLat[16] = 54.617165;
-        narPBLon[16] = -8.163196;
-        narPBLat[17] = 54.616961;
-        narPBLon[17] = -8.159276;
-        narPBLat[18] = 54.613221;
-        narPBLon[18] = -8.160408;
+        donBLat[1] = 54.617375;
+        donBLon[1] = -8.157440;
+        donBLat[2] = 54.617797;
+        donBLon[2] = -8.163386;
+        donBLat[3] = 54.619786;
+        donBLon[3] = -8.161656;
+        donBLat[4] = 54.623807;
+        donBLon[4] = -8.159336;
+        donBLat[5] = 54.625238;
+        donBLon[5] = -8.157980;
+        donBLat[6] = 54.622532;
+        donBLon[6] = -8.164867;
+        donBLat[7] = 54.618216;
+        donBLon[7] = -8.165272;
+        donBLat[8] = 54.613262;
+        donBLon[8] = -8.164880;
+        donBLat[9] = 54.611881;
+        donBLon[9] = -8.159922;
+        donBLat[10] = 54.613911;
+        donBLon[10] = -8.164487;
+        donBLat[11] = 54.617543;
+        donBLon[11] = -8.164891;
+        donBLat[12] = 54.622493;
+        donBLon[12] = -8.162511;
+        donBLat[13] = 54.622966;
+        donBLon[13] = -8.160907;
+        donBLat[14] = 54.617981;
+        donBLon[14] = -8.163774;
+        donBLat[15] = 54.614332;
+        donBLon[15] = -8.161467;
+        donBLat[16] = 54.617165;
+        donBLon[16] = -8.163196;
+        donBLat[17] = 54.616961;
+        donBLon[17] = -8.159276;
+        donBLat[18] = 54.613221;
+        donBLon[18] = -8.160408;
 
         //donegal murvagh front
 
-        narPFLat[1] = 54.617222;
-        narPFLon[1] = -8.157499;
-        narPFLat[2] = 54.617845;
-        narPFLon[2] = -8.162851;
-        narPFLat[3] = 54.619562;
-        narPFLon[3] = -8.161737;
-        narPFLat[4] = 54.623585;
-        narPFLon[4] = -8.159578;
-        narPFLat[5] = 54.625092;
-        narPFLon[5] = -8.158419;
-        narPFLat[6] = 54.622683;
-        narPFLon[6] = -8.164671;
-        narPFLat[7] = 54.618421;
-        narPFLon[7] = -8.165327;
-        narPFLat[8] = 54.613553;
-        narPFLon[8] = -8.164922;
-        narPFLat[9] = 54.612113;
-        narPFLon[9] = -8.160216;
-        narPFLat[10] = 54.613970;
-        narPFLon[10] = -8.164003;
-        narPFLat[11] = 54.617401;
-        narPFLon[11] = -8.164871;
-        narPFLat[12] = 54.622265;
-        narPFLon[12] = -8.162560;
-        narPFLat[13] = 54.622957;
-        narPFLon[13] = -8.161388;
-        narPFLat[14] = 54.618188;
-        narPFLon[14] = -8.163606;
-        narPFLat[15] = 54.614594;
-        narPFLon[15] = -8.161570;
-        narPFLat[16] = 54.616961;
-        narPFLon[16] = -8.162977;
-        narPFLat[17] = 54.616957;
-        narPFLon[17] = -8.159607;
-        narPFLat[18] = 54.613449;
-        narPFLon[18] = -8.160414;
+        donFLat[1] = 54.617222;
+        donFLon[1] = -8.157499;
+        donFLat[2] = 54.617845;
+        donFLon[2] = -8.162851;
+        donFLat[3] = 54.619561;
+        donFLon[3] = -8.161735;
+        donFLat[4] = 54.623585;
+        donFLon[4] = -8.159578;
+        donFLat[5] = 54.625092;
+        donFLon[5] = -8.158419;
+        donFLat[6] = 54.622683;
+        donFLon[6] = -8.164671;
+        donFLat[7] = 54.618421;
+        donFLon[7] = -8.165327;
+        donFLat[8] = 54.613553;
+        donFLon[8] = -8.164922;
+        donFLat[9] = 54.612113;
+        donFLon[9] = -8.160216;
+        donFLat[10] = 54.613970;
+        donFLon[10] = -8.164003;
+        donFLat[11] = 54.617401;
+        donFLon[11] = -8.164871;
+        donFLat[12] = 54.622265;
+        donFLon[12] = -8.162560;
+        donFLat[13] = 54.622957;
+        donFLon[13] = -8.161388;
+        donFLat[14] = 54.618188;
+        donFLon[14] = -8.163606;
+        donFLat[15] = 54.614594;
+        donFLon[15] = -8.161570;
+        donFLat[16] = 54.616961;
+        donFLon[16] = -8.162977;
+        donFLat[17] = 54.616957;
+        donFLon[17] = -8.159607;
+        donFLat[18] = 54.613449;
+        donFLon[18] = -8.160414;
+
+        //letterkenny golf club centre
+        letLat[1] = 54.961716;
+        letLon[1] = -7.681945;
+        letLat[2] = 54.962275;
+        letLon[2] = -7.675120;
+        letLat[3] = 54.963172;
+        letLon[3] = -7.670014;
+        letLat[4] = 54.964699;
+        letLon[4] = -7.666250;
+        letLat[5] = 54.965926;
+        letLon[5] = -7.664026;
+        letLat[6] = 54.964293;
+        letLon[6] = -7.669554;
+        letLat[7] = 54.962774;
+        letLon[7] = -7.674951;
+        letLat[8] = 54.963834;
+        letLon[8] = -7.673911;
+        letLat[9] = 54.963144;
+        letLon[9] = -7.679800;
+        letLat[10] = 54.964466;
+        letLon[10] = -7.675641;
+        letLat[11] = 54.965497;
+        letLon[11] = -7.681004;
+        letLat[12] = 54.966633;
+        letLon[12] = -7.685375;
+        letLat[13] = 54.964974;
+        letLon[13] = -7.682355;
+        letLat[14] = 54.964534;
+        letLon[14] = -7.688709;
+        letLat[15] = 54.965467;
+        letLon[15] = -7.684875;
+        letLat[16] = 54.966247;
+        letLon[16] = -7.686040;
+        letLat[17] = 54.964864;
+        letLon[17] = -7.690912;
+        letLat[18] = 54.962851;
+        letLon[18] = -7.685225;
+
+        //letterkenny back
+        letBLat[1] = 54.961628;
+        letBLon[1] = -7.681970;
+        letBLat[2] = 54.962268;
+        letBLon[2] = -7.674880;
+        letBLat[3] = 54.963194;
+        letBLon[3] = -7.669848;
+        letBLat[4] = 54.964772;
+        letBLon[4] = -7.666118;
+        letBLat[5] = 54.965972;
+        letBLon[5] = -7.663899;
+        letBLat[6] = 54.964244;
+        letBLon[6] = -7.669690;
+        letBLat[7] = 54.962757;
+        letBLon[7] = -7.675155;
+        letBLat[8] = 54.963918;
+        letBLon[8] = -7.673736;
+        letBLat[9] = 54.963108;
+        letBLon[9] = -7.679992;
+        letBLat[10] = 54.964504;
+        letBLon[10] = -7.675502;
+        letBLat[11] = 54.965553;
+        letBLon[11] = -7.681198;
+        letBLat[12] = 54.966683;
+        letBLon[12] = -7.685509;
+        letBLat[13] = 54.964856;
+        letBLon[13] = -7.682320;
+        letBLat[14] = 54.964535;
+        letBLon[14] = -7.688839;
+        letBLat[15] = 54.965483;
+        letBLon[15] = -7.684674;
+        letBLat[16] = 54.966314;
+        letBLon[16] = -7.686157;
+        letBLat[17] = 54.964766;
+        letBLon[17] = -7.691100;
+        letBLat[18] = 54.962781;
+        letBLon[18] = -7.685085;
+
+        //letterkenny front
+
+        letFLat[1] = 54.961800;
+        letFLon[1] = -7.681903;
+        letFLat[2] = 54.962313;
+        letFLon[2] = -7.675388;
+        letFLat[3] = 54.963125;
+        letFLon[3] = -7.670196;
+        letFLat[4] = 54.964625;
+        letFLon[4] = -7.666386;
+        letFLat[5] = 54.965891;
+        letFLon[5] = -7.664143;
+        letFLat[6] = 54.964363;
+        letFLon[6] = -7.669417;
+        letFLat[7] = 54.962743;
+        letFLon[7] = -7.674707;
+        letFLat[8] = 54.963771;
+        letFLon[8] = -7.674119;
+        letFLat[9] = 54.963182;
+        letFLon[9] = -7.679627;
+        letFLat[10] = 54.964438;
+        letFLon[10] = -7.675813;
+        letFLat[11] = 54.965457;
+        letFLon[11] = -7.680790;
+        letFLat[12] = 54.966584;
+        letFLon[12] = -7.685233;
+        letFLat[13] = 54.965083;
+        letFLon[13] = -7.682502;
+        letFLat[14] = 54.964527;
+        letFLon[14] = -7.688599;
+        letFLat[15] = 54.965447;
+        letFLon[15] = -7.685069;
+        letFLat[16] = 54.966200;
+        letFLon[16] = -7.685938;
+        letFLat[17] = 54.964949;
+        letFLon[17] = -7.690745;
+        letFLat[18] = 54.962917;
+        letFLon[18] = -7.685390;
 
     }
 
