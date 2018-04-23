@@ -1,15 +1,18 @@
 <resources>
     <string name="app_name">Greenseeker Golf GPS</string>
     <string-array name="golf_clubs">
-        <item>North West Golf Club</item>
-        <item>Buncrana Golf Club</item>
+        <item>North West</item>
+        <item>Buncrana</item>
         <item>Ballyliffin (Old Links)</item>
         <item>Ballyliffin (Glashedy)</item>
-        <item>Portsalon Golf Club</item>
-        <item>Ballybofey Golf Club</item>
-        <item>Narin &amp; Portnoo GC</item>
-        <item>Donegal (Murvagh) GC</item>
-        <item>Letterkenny Golf Club</item>
+        <item>Portsalon</item>
+        <item>Ballybofey &amp; Stranorlar</item>
+        <item>Narin &amp; Portnoo</item>
+        <item>Donegal (Murvagh)</item>
+        <item>Letterkenny</item>
+        <item>Cruit Island</item>
+        <item>Greencastle</item>
+        <item>Dunfanaghy</item>
 
     </string-array>
 

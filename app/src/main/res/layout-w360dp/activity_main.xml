@@ -74,7 +74,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="22dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:text="1st"
         android:textColor="@android:color/black"
         android:textSize="13sp"
@@ -87,7 +87,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="22dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:text="2nd"
         android:textColor="@android:color/black"
         android:textSize="13sp"
@@ -100,7 +100,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="22dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:text="3rd"
         android:textColor="@android:color/black"
         android:textSize="13sp"
@@ -113,7 +113,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="22dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:text="4th"
         android:textColor="@android:color/black"
         android:textSize="13sp"
@@ -126,7 +126,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="22dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:text="5th"
         android:textColor="@android:color/black"
         android:textSize="13sp"
@@ -139,7 +139,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="22dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:text="6th"
         android:textColor="@android:color/black"
         android:textSize="13sp"
@@ -152,7 +152,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="22dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:text="7th"
         android:textColor="@android:color/black"
         android:textSize="13sp"
@@ -165,7 +165,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="22dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:text="8th"
         android:textColor="@android:color/black"
         android:textSize="13sp"
@@ -178,7 +178,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="22dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:text="9th"
         android:textColor="@android:color/black"
         android:textSize="13sp"
@@ -625,30 +625,6 @@
         app:layout_constraintTop_toBottomOf="@+id/tempText" />
 
     <TextView
-        android:id="@+id/textView55"
-        android:layout_width="wrap_content"
-        android:layout_height="20dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:text="TextView"
-        android:textSize="12sp"
-        android:visibility="invisible"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/num9" />
-
-    <TextView
-        android:id="@+id/textView56"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
-        android:text="TextView"
-        android:textSize="12sp"
-        android:visibility="invisible"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView55" />
-
-    <TextView
         android:id="@+id/greenText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -677,8 +653,8 @@
 
     <ImageView
         android:id="@+id/arrowImage"
-        android:layout_width="26dp"
-        android:layout_height="26dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
         android:contentDescription="Arrow Direction For Wind"
@@ -819,7 +795,7 @@
         android:fontFamily="sans-serif-condensed"
         android:text="268"
         android:textAllCaps="false"
-        android:textSize="12sp"
+        android:textSize="11sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/distText1"
         app:layout_constraintTop_toBottomOf="@+id/greenText" />
@@ -832,7 +808,7 @@
         android:layout_marginTop="1dp"
         android:fontFamily="sans-serif-condensed"
         android:text="235"
-        android:textSize="12sp"
+        android:textSize="11sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/distText1"
         app:layout_constraintTop_toBottomOf="@+id/back1" />
@@ -845,7 +821,7 @@
         android:layout_marginTop="12dp"
         android:fontFamily="sans-serif-condensed"
         android:text="564"
-        android:textSize="12sp"
+        android:textSize="11sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/distText2"
         app:layout_constraintTop_toBottomOf="@+id/num1" />
@@ -858,7 +834,7 @@
         android:layout_marginTop="28dp"
         android:fontFamily="sans-serif-condensed"
         android:text="541"
-        android:textSize="12sp"
+        android:textSize="11sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/distText2"
         app:layout_constraintTop_toBottomOf="@+id/num1" />
@@ -871,7 +847,7 @@
         android:layout_marginTop="12dp"
         android:fontFamily="sans-serif-condensed"
         android:text="482"
-        android:textSize="12sp"
+        android:textSize="11sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/distText3"
         app:layout_constraintTop_toBottomOf="@+id/num2" />
@@ -884,7 +860,7 @@
         android:layout_marginTop="28dp"
         android:fontFamily="sans-serif-condensed"
         android:text="452"
-        android:textSize="12sp"
+        android:textSize="11sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/distText3"
         app:layout_constraintTop_toBottomOf="@+id/num2" />
@@ -897,7 +873,7 @@
         android:layout_marginTop="12dp"
         android:fontFamily="sans-serif-condensed"
         android:text="634"
-        android:textSize="12sp"
+        android:textSize="11sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/distText4"
         app:layout_constraintTop_toBottomOf="@+id/num3" />
@@ -910,7 +886,7 @@
         android:layout_marginTop="28dp"
         android:fontFamily="sans-serif-condensed"
         android:text="611"
-        android:textSize="12sp"
+        android:textSize="11sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/distText4"
         app:layout_constraintTop_toBottomOf="@+id/num3" />
@@ -923,7 +899,7 @@
         android:layout_marginTop="12dp"
         android:fontFamily="sans-serif-condensed"
         android:text="718"
-        android:textSize="12sp"
+        android:textSize="11sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/distText5"
         app:layout_constraintTop_toBottomOf="@+id/num4" />
@@ -936,7 +912,7 @@
         android:layout_marginTop="28dp"
         android:fontFamily="sans-serif-condensed"
         android:text="684"
-        android:textSize="12sp"
+        android:textSize="11sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/distText5"
         app:layout_constraintTop_toBottomOf="@+id/num4" />
@@ -949,7 +925,7 @@
         android:layout_marginTop="12dp"
         android:fontFamily="sans-serif-condensed"
         android:text="824"
-        android:textSize="12sp"
+        android:textSize="11sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/distText6"
         app:layout_constraintTop_toBottomOf="@+id/num5" />
@@ -962,7 +938,7 @@
         android:layout_marginTop="28dp"
         android:fontFamily="sans-serif-condensed"
         android:text="801"
-        android:textSize="12sp"
+        android:textSize="11sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/distText6"
         app:layout_constraintTop_toBottomOf="@+id/num5" />
@@ -975,7 +951,7 @@
         android:layout_marginTop="12dp"
         android:fontFamily="sans-serif-condensed"
         android:text="901"
-        android:textSize="12sp"
+        android:textSize="11sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/distText7"
         app:layout_constraintTop_toBottomOf="@+id/num6" />
@@ -988,7 +964,7 @@
         android:layout_marginTop="28dp"
         android:fontFamily="sans-serif-condensed"
         android:text="872"
-        android:textSize="12sp"
+        android:textSize="11sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/distText7"
         app:layout_constraintTop_toBottomOf="@+id/num6" />
@@ -1001,7 +977,7 @@
         android:layout_marginTop="12dp"
         android:fontFamily="sans-serif-condensed"
         android:text="952"
-        android:textSize="12sp"
+        android:textSize="11sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/distText8"
         app:layout_constraintTop_toBottomOf="@+id/num7" />
@@ -1014,7 +990,7 @@
         android:layout_marginTop="28dp"
         android:fontFamily="sans-serif-condensed"
         android:text="940"
-        android:textSize="12sp"
+        android:textSize="11sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/distText8"
         app:layout_constraintTop_toBottomOf="@+id/num7" />
@@ -1027,7 +1003,7 @@
         android:layout_marginTop="12dp"
         android:fontFamily="sans-serif-condensed"
         android:text="1260"
-        android:textSize="12sp"
+        android:textSize="11sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/distText9"
         app:layout_constraintTop_toBottomOf="@+id/num8" />
@@ -1041,7 +1017,7 @@
         android:layout_marginTop="28dp"
         android:fontFamily="sans-serif-condensed"
         android:text="1244"
-        android:textSize="12sp"
+        android:textSize="11sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/distText9"
         app:layout_constraintTop_toBottomOf="@+id/num8" />
@@ -1054,7 +1030,7 @@
         android:layout_marginTop="12dp"
         android:fontFamily="sans-serif-condensed"
         android:text="1012"
-        android:textSize="12sp"
+        android:textSize="11sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/distText10"
         app:layout_constraintTop_toBottomOf="@+id/greenText" />
@@ -1067,7 +1043,7 @@
         android:layout_marginTop="1dp"
         android:fontFamily="sans-serif-condensed"
         android:text="979"
-        android:textSize="12sp"
+        android:textSize="11sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/distText10"
         app:layout_constraintTop_toBottomOf="@+id/back10" />
@@ -1080,7 +1056,7 @@
         android:layout_marginTop="12dp"
         android:fontFamily="sans-serif-condensed"
         android:text="780"
-        android:textSize="12sp"
+        android:textSize="11sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/distText11"
         app:layout_constraintTop_toBottomOf="@+id/num10" />
@@ -1093,7 +1069,7 @@
         android:layout_marginTop="28dp"
         android:fontFamily="sans-serif-condensed"
         android:text="760"
-        android:textSize="12sp"
+        android:textSize="11sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/distText11"
         app:layout_constraintTop_toBottomOf="@+id/num10" />
@@ -1106,7 +1082,7 @@
         android:layout_marginTop="12dp"
         android:fontFamily="sans-serif-condensed"
         android:text="380"
-        android:textSize="12sp"
+        android:textSize="11sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/distText12"
         app:layout_constraintTop_toBottomOf="@+id/num11" />
@@ -1119,7 +1095,7 @@
         android:layout_marginTop="28dp"
         android:fontFamily="sans-serif-condensed"
         android:text="349"
-        android:textSize="12sp"
+        android:textSize="11sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/distText12"
         app:layout_constraintTop_toBottomOf="@+id/num11" />
@@ -1132,7 +1108,7 @@
         android:layout_marginTop="12dp"
         android:fontFamily="sans-serif-condensed"
         android:text="652"
-        android:textSize="12sp"
+        android:textSize="11sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/distText13"
         app:layout_constraintTop_toBottomOf="@+id/num12" />
@@ -1145,7 +1121,7 @@
         android:layout_marginTop="28dp"
         android:fontFamily="sans-serif-condensed"
         android:text="630"
-        android:textSize="12sp"
+        android:textSize="11sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/distText13"
         app:layout_constraintTop_toBottomOf="@+id/num12" />
@@ -1158,7 +1134,7 @@
         android:layout_marginTop="12dp"
         android:fontFamily="sans-serif-condensed"
         android:text="886"
-        android:textSize="12sp"
+        android:textSize="11sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/distText14"
         app:layout_constraintTop_toBottomOf="@+id/num13" />
@@ -1171,7 +1147,7 @@
         android:layout_marginTop="28dp"
         android:fontFamily="sans-serif-condensed"
         android:text="867"
-        android:textSize="12sp"
+        android:textSize="11sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/distText14"
         app:layout_constraintTop_toBottomOf="@+id/num13" />
@@ -1184,7 +1160,7 @@
         android:layout_marginTop="12dp"
         android:fontFamily="sans-serif-condensed"
         android:text="1009"
-        android:textSize="12sp"
+        android:textSize="11sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/distText15"
         app:layout_constraintTop_toBottomOf="@+id/num14" />
@@ -1197,7 +1173,7 @@
         android:layout_marginTop="28dp"
         android:fontFamily="sans-serif-condensed"
         android:text="984"
-        android:textSize="12sp"
+        android:textSize="11sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/distText15"
         app:layout_constraintTop_toBottomOf="@+id/num14" />
@@ -1210,7 +1186,7 @@
         android:layout_marginTop="12dp"
         android:fontFamily="sans-serif-condensed"
         android:text="661"
-        android:textSize="12sp"
+        android:textSize="11sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/distText16"
         app:layout_constraintTop_toBottomOf="@+id/num15" />
@@ -1223,7 +1199,7 @@
         android:layout_marginTop="28dp"
         android:fontFamily="sans-serif-condensed"
         android:text="632"
-        android:textSize="12sp"
+        android:textSize="11sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/distText16"
         app:layout_constraintTop_toBottomOf="@+id/num15" />
@@ -1236,7 +1212,7 @@
         android:layout_marginTop="12dp"
         android:fontFamily="sans-serif-condensed"
         android:text="281"
-        android:textSize="12sp"
+        android:textSize="11sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/distText17"
         app:layout_constraintTop_toBottomOf="@+id/num16" />
@@ -1249,7 +1225,7 @@
         android:layout_marginTop="28dp"
         android:fontFamily="sans-serif-condensed"
         android:text="252"
-        android:textSize="12sp"
+        android:textSize="11sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/distText17"
         app:layout_constraintTop_toBottomOf="@+id/num16" />
@@ -1262,7 +1238,7 @@
         android:layout_marginTop="12dp"
         android:fontFamily="sans-serif-condensed"
         android:text="601"
-        android:textSize="12sp"
+        android:textSize="11sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/distText18"
         app:layout_constraintTop_toBottomOf="@+id/num17" />
@@ -1275,7 +1251,7 @@
         android:layout_marginTop="28dp"
         android:fontFamily="sans-serif-condensed"
         android:text="562"
-        android:textSize="12sp"
+        android:textSize="11sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/distText18"
         app:layout_constraintTop_toBottomOf="@+id/num17" />
@@ -1304,6 +1280,22 @@
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/textView38"
         app:layout_constraintTop_toBottomOf="@+id/textView38" />
+
+    <ProgressBar
+        android:id="@+id/progressBar1"
+        style="@android:style/Widget.DeviceDefault.Light.ProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+        app:layout_constraintEnd_toEndOf="@+id/imageView3"
+        app:layout_constraintStart_toStartOf="@+id/imageView2"
+        app:layout_constraintTop_toTopOf="@+id/imageView2" />
 
     <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
         android:id="@+id/adView"
