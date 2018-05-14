@@ -30,10 +30,6 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -244,9 +240,6 @@ public class MainActivity extends AppCompatActivity {
 
     String weatherLink = "http://api.openweathermap.org/data/2.5/weather?id=2654332&APPID=d2f1c7fd747498a9246f9467457b722e"; //link to get weather data is JSON format
 
-    AdView adView;
-
-
     public static double round(double value, int places) {
         if (places < 0) throw new IllegalArgumentException();
 
@@ -297,8 +290,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        MobileAds.initialize(this, "ca-app-pub-7306277568792563~7353995311"); //app id from admob. ad is changed from test to live ad in the xml, not here.
-        adView = findViewById(R.id.adView); //adView banner at bottom of screen
 
         sp = getSharedPreferences("your_prefs", Activity.MODE_PRIVATE);
         editor = sp.edit();
@@ -616,10 +607,6 @@ public class MainActivity extends AppCompatActivity {
 
                 makeUseOfNewLocation(location);
                 if (firstLocationResult) { //if this is the first time the location was received
-
-                    AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).setLocation(location).build(); //build adRequest using location object
-//                    AdRequest adRequest = new AdRequest.Builder().setLocation(location).build();
-                    adView.loadAd(adRequest); //load ad into adView (banner at bottom)
                     firstLocationResult = false; //update boolean so adRequest isn't called again (only call once)
                 }
 
